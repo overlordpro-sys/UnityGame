@@ -5,7 +5,7 @@ using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Player {
+namespace Assets.Code.Scripts.Player {
     public class PlayerNetwork : NetworkBehaviour {
         [SerializeField] private Rigidbody2D _body;
 
