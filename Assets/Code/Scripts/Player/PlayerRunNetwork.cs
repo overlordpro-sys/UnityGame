@@ -82,11 +82,11 @@ namespace Assets.Code.Scripts.Player {
             // Gravity
             if (_body.velocityY < 0 && _moveDirection.y < 0) { // if falling and pressing down
                 SetGravityScale(Data.gravityScale * Data.fastFallGravityMult);
-                _body.velocity = new Vector2(_body.velocity.x, Mathf.Max(_body.velocity.y, -Data.maxFastFallSpeed));
+                _body.velocity = new Vector2(_body.velocity.x, Mathf.Min(_body.velocity.y, -Data.maxFastFallSpeed));
             }
             else if (_isJumpCut) {
                 SetGravityScale(Data.gravityScale * Data.jumpCutGravityMult);
-                _body.velocity = new Vector2(_body.velocity.x, Mathf.Max(_body.velocity.y, -Data.maxFallSpeed));
+                _body.velocity = new Vector2(_body.velocity.x, Mathf.Min(_body.velocity.y, -Data.maxFallSpeed));
             }
             else if ((_isJumping || _isJumpFalling) && Mathf.Abs(_body.velocityY) < Data.jumpHangTimeThreshold) {
                 SetGravityScale(Data.gravityScale * Data.jumpHangGravityMult);
@@ -94,7 +94,7 @@ namespace Assets.Code.Scripts.Player {
             else if (_body.velocity.y < 0) {
                 //Higher gravity if falling
                 SetGravityScale(Data.gravityScale * Data.fallGravityMult);
-                _body.velocity = new Vector2(_body.velocity.x, Mathf.Max(_body.velocity.y, -Data.maxFallSpeed));
+                _body.velocity = new Vector2(_body.velocity.x, Mathf.Min(_body.velocity.y, -Data.maxFallSpeed));
             }
             else {
                 //Default gravity if standing on a platform or moving upwards
@@ -105,7 +105,6 @@ namespace Assets.Code.Scripts.Player {
             if (!IsOwner) {
                 return;
             }
-
             Run();
         }
 
