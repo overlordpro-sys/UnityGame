@@ -89,7 +89,7 @@ MonoBehaviour:
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!50 &177080592760270954
 Rigidbody2D:
@@ -182,13 +182,13 @@ MonoBehaviour:
   Data: {fileID: 11400000, guid: d905237795b619e478d079317445553c, type: 2}
   _body: {fileID: 177080592760270954}
   _collider: {fileID: -8175786311164958099}
+  _moveAction: {fileID: 1899877711907216102, guid: 8697f41a9c45c37409b0c0a04e9a586f, type: 3}
+  _jumpAction: {fileID: -5290136167405392433, guid: 8697f41a9c45c37409b0c0a04e9a586f, type: 3}
   _groundBoxXOffset: 0
   _groundBoxY: 0.5
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  _moveAction: {fileID: 1899877711907216102, guid: 8697f41a9c45c37409b0c0a04e9a586f, type: 3}
-  _jumpAction: {fileID: -5290136167405392433, guid: 8697f41a9c45c37409b0c0a04e9a586f, type: 3}
 --- !u!114 &271647710029162103
 MonoBehaviour:
   m_ObjectHideFlags: 0
