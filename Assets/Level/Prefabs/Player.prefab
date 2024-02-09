@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5cf0e88883f184b8411287045b3dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: d905237795b619e478d079317445553c, type: 2}
+  _data: {fileID: 0}
   _body: {fileID: 177080592760270954}
   _collider: {fileID: -8175786311164958099}
   _moveAction: {fileID: 1899877711907216102, guid: 8697f41a9c45c37409b0c0a04e9a586f, type: 3}

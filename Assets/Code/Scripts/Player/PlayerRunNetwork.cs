@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace Assets.Code.Scripts.Player {
     public class PlayerNetwork : NetworkBehaviour {
-        [SerializeField] private PlayerRunData Data;
+        [SerializeField] private PlayerMovementData _data;
 
         // Physics objects
         [SerializeField] private Rigidbody2D _body;
@@ -58,7 +58,7 @@ namespace Assets.Code.Scripts.Player {
 
             // Time since was last grounded for leniency
             if (!_isJumping && IsGrounded()) { //checks if set box overlaps with ground
-                _lastOnGroundTime = Data.coyoteTime;
+                _lastOnGroundTime = _data.coyoteTime;
             }
 
             // Jump checks
@@ -81,24 +81,24 @@ namespace Assets.Code.Scripts.Player {
 
             // Gravity
             if (_body.velocityY < 0 && _moveDirection.y < 0) { // if falling and pressing down
-                SetGravityScale(Data.gravityScale * Data.fastFallGravityMult);
-                _body.velocity = new Vector2(_body.velocity.x, Mathf.Min(_body.velocity.y, -Data.maxFastFallSpeed));
+                SetGravityScale(_data.gravityScale * _data.fastFallGravityMult);
+                _body.velocity = new Vector2(_body.velocity.x, Mathf.Min(_body.velocity.y, -_data.maxFastFallSpeed));
             }
             else if (_isJumpCut) {
-                SetGravityScale(Data.gravityScale * Data.jumpCutGravityMult);
-                _body.velocity = new Vector2(_body.velocity.x, Mathf.Min(_body.velocity.y, -Data.maxFallSpeed));
+                SetGravityScale(_data.gravityScale * _data.jumpCutGravityMult);
+                _body.velocity = new Vector2(_body.velocity.x, Mathf.Min(_body.velocity.y, -_data.maxFallSpeed));
             }
-            else if ((_isJumping || _isJumpFalling) && Mathf.Abs(_body.velocityY) < Data.jumpHangTimeThreshold) {
-                SetGravityScale(Data.gravityScale * Data.jumpHangGravityMult);
+            else if ((_isJumping || _isJumpFalling) && Mathf.Abs(_body.velocityY) < _data.jumpHangTimeThreshold) {
+                SetGravityScale(_data.gravityScale * _data.jumpHangGravityMult);
             }
             else if (_body.velocity.y < 0) {
                 //Higher gravity if falling
-                SetGravityScale(Data.gravityScale * Data.fallGravityMult);
-                _body.velocity = new Vector2(_body.velocity.x, Mathf.Min(_body.velocity.y, -Data.maxFallSpeed));
+                SetGravityScale(_data.gravityScale * _data.fallGravityMult);
+                _body.velocity = new Vector2(_body.velocity.x, Mathf.Min(_body.velocity.y, -_data.maxFallSpeed));
             }
             else {
                 //Default gravity if standing on a platform or moving upwards
-                SetGravityScale(Data.gravityScale);
+                SetGravityScale(_data.gravityScale);
             }
         }
         private void FixedUpdate() {
@@ -110,26 +110,26 @@ namespace Assets.Code.Scripts.Player {
 
         // Run
         private void Run() {
-            float targetSpeed = _moveDirection.x * Data.runMaxSpeed;
+            float targetSpeed = _moveDirection.x * _data.runMaxSpeed;
             targetSpeed = Mathf.Lerp(_body.velocityX, targetSpeed, 1);
             float accelRate;
 
             // Different accelerations based on grounded
             if (_lastOnGroundTime > 0)
-                accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? Data.runAccelAmount : Data.runDeccelAmount;
+                accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _data.runAccelAmount : _data.runDeccelAmount;
             else
-                accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? Data.runAccelAmount * Data.accelInAir : Data.runDeccelAmount * Data.deccelInAir;
+                accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _data.runAccelAmount * _data.accelInAir : _data.runDeccelAmount * _data.deccelInAir;
 
 
             //Increase are acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
-            if ((_isJumping || _isJumpFalling) && Mathf.Abs(_body.velocityY) < Data.jumpHangTimeThreshold) {
-                accelRate *= Data.jumpHangAccelerationMult;
-                targetSpeed *= Data.jumpHangMaxSpeedMult;
+            if ((_isJumping || _isJumpFalling) && Mathf.Abs(_body.velocityY) < _data.jumpHangTimeThreshold) {
+                accelRate *= _data.jumpHangAccelerationMult;
+                targetSpeed *= _data.jumpHangMaxSpeedMult;
             }
 
 
             //We won't slow the player down if they are moving in their desired direction but at a greater speed than their maxSpeed
-            if (Data.doConserveMomentum && Mathf.Abs(_body.velocity.x) > Mathf.Abs(targetSpeed) && Mathf.Sign(_body.velocity.x) == Mathf.Sign(targetSpeed) && Mathf.Abs(targetSpeed) > 0.01f && _lastOnGroundTime < 0) {
+            if (_data.doConserveMomentum && Mathf.Abs(_body.velocity.x) > Mathf.Abs(targetSpeed) && Mathf.Sign(_body.velocity.x) == Mathf.Sign(targetSpeed) && Mathf.Abs(targetSpeed) > 0.01f && _lastOnGroundTime < 0) {
                 // Conserve are current momentum
                 // You could experiment with allowing for the player to slightly increae their speed whilst in this "state"
                 accelRate = 0;
@@ -154,7 +154,7 @@ namespace Assets.Code.Scripts.Player {
 
         // Jump
         private void OnJumpDown(InputAction.CallbackContext context) {
-            _lastPressedJumpTime = Data.jumpInputBufferTime;
+            _lastPressedJumpTime = _data.jumpInputBufferTime;
         }
 
         private void OnJumpUp(InputAction.CallbackContext context) {
@@ -167,7 +167,7 @@ namespace Assets.Code.Scripts.Player {
             _lastOnGroundTime = 0;
             _body.velocityY = 0;
 
-            _body.AddForceY(Data.jumpForce, ForceMode2D.Impulse);
+            _body.AddForceY(_data.jumpForce, ForceMode2D.Impulse);
         }
 
         private void SetGravityScale(float scale) {

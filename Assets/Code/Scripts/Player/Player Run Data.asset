@@ -25,13 +25,13 @@ MonoBehaviour:
   runDeccelAmount: 12.5
   accelInAir: 0.201
   deccelInAir: 0.201
-  doConserveMomentum: 0
+  doConserveMomentum: 1
   jumpHeight: 6
   jumpTimeToApex: 0.4
   jumpForce: 30
   jumpCutGravityMult: 1
-  jumpHangGravityMult: 1
-  jumpHangTimeThreshold: 0.5
+  jumpHangGravityMult: 0.4
+  jumpHangTimeThreshold: 4
   jumpHangAccelerationMult: 1
   jumpHangMaxSpeedMult: 1
   coyoteTime: 0.1
