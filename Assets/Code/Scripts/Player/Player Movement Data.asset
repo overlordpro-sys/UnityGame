@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20404602d0cbef240aa987e0de21325c, type: 3}
-  m_Name: Player Run Data
+  m_Name: Player Movement Data
   m_EditorClassIdentifier: 
   gravityStrength: -75
   gravityScale: 7.6452594
   fallGravityMult: 1
   maxFallSpeed: 3
-  fastFallGravityMult: 1
+  fastFallGravityMult: 2
   maxFastFallSpeed: 10
   runMaxSpeed: 20
   runAcceleration: 5

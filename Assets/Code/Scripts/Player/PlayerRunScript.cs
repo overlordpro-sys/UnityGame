@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Code.Scripts.Player {
     [RequireComponent(typeof(PlayerScript))]
-    [RequireComponent(typeof(PlayerMovementData))]
     public class PlayerRunScript : NetworkBehaviour {
         [SerializeField] private PlayerScript PlayerScript;
         [SerializeField] private PlayerMovementData _data;

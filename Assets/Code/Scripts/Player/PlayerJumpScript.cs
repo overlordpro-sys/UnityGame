@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 namespace Assets.Code.Scripts.Player {
     [RequireComponent(typeof(PlayerScript))]
-    [RequireComponent(typeof(PlayerMovementData))]
     public class PlayerJumpScript : NetworkBehaviour {
         [SerializeField] private PlayerScript PlayerScript;
         [SerializeField] private PlayerMovementData _data;
@@ -30,6 +29,8 @@ namespace Assets.Code.Scripts.Player {
             if (!IsOwner) {
                 return;
             }
+
+            _lastPressedJumpTime -= Time.deltaTime;
 
             // Time since was last grounded for leniency
             if (!_isJumping && PlayerScript.ColliderScript.IsGrounded()) { //checks if set box overlaps with ground
