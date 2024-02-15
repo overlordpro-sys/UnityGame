@@ -14,12 +14,13 @@ GameObject:
   - component: {fileID: 177080592760270954}
   - component: {fileID: -4160834534928867093}
   - component: {fileID: -8175786311164958099}
-  - component: {fileID: -1472393797132984569}
+  - component: {fileID: 2171701304998014991}
   - component: {fileID: 271647710029162103}
   - component: {fileID: 6429667739947589871}
   - component: {fileID: 5569794367521522123}
   - component: {fileID: 8304012435689777514}
   - component: {fileID: -773839004701019347}
+  - component: {fileID: 7266140773680601055}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -171,7 +172,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &-1472393797132984569
+--- !u!114 &2171701304998014991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,15 +181,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3982501487727505640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30b9ee0605db0ef43836ae05ea9d0eba, type: 3}
+  m_Script: {fileID: 11500000, guid: ec326ebd2bad9a04d858f734e663e57a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Body: {fileID: 177080592760270954}
-  Collider: {fileID: -8175786311164958099}
-  RunScript: {fileID: 8304012435689777514}
-  JumpScript: {fileID: 5569794367521522123}
-  InputScript: {fileID: 6429667739947589871}
-  ColliderScript: {fileID: -773839004701019347}
 --- !u!114 &271647710029162103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99a732fea704324fb95b82c750c630d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerScript: {fileID: -1472393797132984569}
+  _player: {fileID: 7266140773680601055}
   _data: {fileID: 11400000, guid: d905237795b619e478d079317445553c, type: 2}
 --- !u!114 &8304012435689777514
 MonoBehaviour:
@@ -259,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a217704281e24545a7784079a792bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerScript: {fileID: -1472393797132984569}
+  _player: {fileID: 7266140773680601055}
   _data: {fileID: 11400000, guid: d905237795b619e478d079317445553c, type: 2}
 --- !u!114 &-773839004701019347
 MonoBehaviour:
@@ -273,12 +268,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7609e8ad99606d49b0d7dd3e8f0b518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerScript: {fileID: -1472393797132984569}
+  _player: {fileID: 7266140773680601055}
   _groundBoxXOffset: 0
   _groundBoxY: 2
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &7266140773680601055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982501487727505640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6b306382f3ad3479adc4ebae23e570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Body: {fileID: 177080592760270954}
+  Collider: {fileID: -8175786311164958099}
+  TimerManager: {fileID: 2171701304998014991}
+  RunScript: {fileID: 8304012435689777514}
+  JumpScript: {fileID: 5569794367521522123}
+  InputScript: {fileID: 6429667739947589871}
+  ColliderScript: {fileID: -773839004701019347}
 --- !u!1 &4425029314083783876
 GameObject:
   m_ObjectHideFlags: 0

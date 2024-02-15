@@ -28,7 +28,7 @@ public class PlayerRunScript : NetworkBehaviour {
         }
 
         // Timers
-        _player.LastOnGroundTime -= Time.deltaTime;
+        _player.TimerManager.LastOnGroundTime -= Time.deltaTime;
 
         Vector2 moveDirection = _player.InputScript.MoveDirection;
         if (moveDirection.x != 0) {
@@ -49,7 +49,7 @@ public class PlayerRunScript : NetworkBehaviour {
         float accelRate;
 
         // Different accelerations based on grounded
-        if (_player.LastOnGroundTime > 0)
+        if (_player.TimerManager.LastOnGroundTime > 0)
             accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _data.runAccelAmount : _data.runDeccelAmount;
         else
             accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _data.runAccelAmount * _data.accelInAir : _data.runDeccelAmount * _data.deccelInAir;
@@ -63,7 +63,7 @@ public class PlayerRunScript : NetworkBehaviour {
 
 
         //We won't slow the player down if they are moving in their desired direction but at a greater speed than their maxSpeed
-        if (_data.doConserveMomentum && Mathf.Abs(_player.Body.velocity.x) > Mathf.Abs(targetSpeed) && Mathf.Sign(_player.Body.velocity.x) == Mathf.Sign(targetSpeed) && Mathf.Abs(targetSpeed) > 0.01f && _player.LastOnGroundTime < 0) {
+        if (_data.doConserveMomentum && Mathf.Abs(_player.Body.velocity.x) > Mathf.Abs(targetSpeed) && Mathf.Sign(_player.Body.velocity.x) == Mathf.Sign(targetSpeed) && Mathf.Abs(targetSpeed) > 0.01f && _player.TimerManager.LastOnGroundTime < 0) {
             // Conserve are current momentum
             // You could experiment with allowing for the player to slightly increae their speed whilst in this "state"
             accelRate = 0;

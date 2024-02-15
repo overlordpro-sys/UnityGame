@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(PlayerTimerManager))]
 [RequireComponent(typeof(PlayerRunScript))]
 [RequireComponent(typeof(PlayerJumpScript))]
 [RequireComponent(typeof(PlayerInputScript))]
@@ -17,13 +18,11 @@ public class Player : NetworkBehaviour, IDamageable {
     [SerializeField] internal Collider2D Collider;
 
     // Child Scripts
+    [SerializeField] internal PlayerTimerManager TimerManager;
     [SerializeField] internal PlayerRunScript RunScript;
     [SerializeField] internal PlayerJumpScript JumpScript;
     [SerializeField] internal PlayerInputScript InputScript;
     [SerializeField] internal PlayerColliderScript ColliderScript;
-
-    // Timers
-    internal float LastOnGroundTime;
 
     // Player Stats
     [SerializeField] public float MaxHealth { get; set; }
