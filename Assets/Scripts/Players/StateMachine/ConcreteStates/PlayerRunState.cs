@@ -15,6 +15,7 @@ public class PlayerRunState : PlayerState {
 
     public override void FrameUpdate() {
         base.FrameUpdate();
+
     }
 
     public override void PhysicsUpdate() {

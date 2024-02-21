@@ -40,10 +40,11 @@ public class PlayerRunScript : NetworkBehaviour {
         if (!IsOwner) {
             return;
         }
+
         Run();
     }
 
-    private void Run() {
+    internal void Run() {
         float targetSpeed = _player.InputScript.MoveDirection.x * _data.runMaxSpeed;
         targetSpeed = Mathf.Lerp(_player.Body.velocityX, targetSpeed, 1);
         float accelRate;
@@ -55,17 +56,16 @@ public class PlayerRunScript : NetworkBehaviour {
             accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _data.runAccelAmount * _data.accelInAir : _data.runDeccelAmount * _data.deccelInAir;
 
 
-        //Increase are acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
+        //Increase our acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
         if ((_player.JumpScript._isJumping || _player.JumpScript._isJumpFalling) && Mathf.Abs(_player.Body.velocityY) < _data.jumpHangTimeThreshold) {
             accelRate *= _data.jumpHangAccelerationMult;
             targetSpeed *= _data.jumpHangMaxSpeedMult;
         }
 
 
-        //We won't slow the player down if they are moving in their desired direction but at a greater speed than their maxSpeed
+        //We won't slow the Player down if they are moving in their desired direction but at a greater speed than their maxSpeed
         if (_data.doConserveMomentum && Mathf.Abs(_player.Body.velocity.x) > Mathf.Abs(targetSpeed) && Mathf.Sign(_player.Body.velocity.x) == Mathf.Sign(targetSpeed) && Mathf.Abs(targetSpeed) > 0.01f && _player.TimerManager.LastOnGroundTime < 0) {
             // Conserve are current momentum
-            // You could experiment with allowing for the player to slightly increae their speed whilst in this "state"
             accelRate = 0;
         }
 
@@ -85,7 +85,7 @@ public class PlayerRunScript : NetworkBehaviour {
     }
 
     private void Turn() {
-        //stores scale and flips the player along the x axis, 
+        //stores scale and flips the Player along the x axis, 
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;

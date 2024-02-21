@@ -20,6 +20,7 @@ public class PlayerJumpState : PlayerState {
 
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
+        Player.RunScript.Run();
     }
 
     public override void AnimationTriggerEvent(Player.AnimationTriggerType triggerType) {

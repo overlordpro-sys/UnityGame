@@ -25,6 +25,8 @@ public class PlayerInputScript : NetworkBehaviour {
         }
 
         MoveAction.action.Enable();
+        MoveAction.action.performed += ctx => MoveDirection = ctx.ReadValue<Vector2>();
+
         JumpAction.action.Enable();
     }
 
@@ -33,8 +35,5 @@ public class PlayerInputScript : NetworkBehaviour {
         if (!IsOwner) {
             return;
         }
-
-        MoveDirection = MoveAction.action.ReadValue<Vector2>(); // Get x movement
-
     }
 }

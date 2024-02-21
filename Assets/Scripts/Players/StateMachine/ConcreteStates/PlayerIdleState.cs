@@ -16,6 +16,10 @@ public class PlayerIdleState : PlayerState {
 
     public override void FrameUpdate() {
         base.FrameUpdate();
+        if (Player.InputScript.MoveDirection.x != 0) {
+            StateMachine.ChangeState(Player.RunState);
+        }
+
     }
 
     public override void PhysicsUpdate() {

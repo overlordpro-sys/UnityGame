@@ -24,6 +24,9 @@ public class Player : NetworkBehaviour, IDamageable {
     [SerializeField] internal PlayerInputScript InputScript;
     [SerializeField] internal PlayerColliderScript ColliderScript;
 
+    [SerializeField] private PlayerMovementData _movementData;
+
+
     // Player Stats
     [SerializeField] public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
@@ -38,7 +41,7 @@ public class Player : NetworkBehaviour, IDamageable {
 
     public override void OnNetworkSpawn() {
         // State initialization
-        StateMachine = new PlayerStateMachine();
+        StateMachine = new PlayerStateMachine(_movementData);
         IdleState = new PlayerIdleState(this, StateMachine);
         RunState = new PlayerRunState(this, StateMachine);
         JumpState = new PlayerJumpState(this, StateMachine);
@@ -85,7 +88,6 @@ public class Player : NetworkBehaviour, IDamageable {
         if (!IsOwner) {
             return;
         }
-
         StateMachine.CurrentPlayerState.PhysicsUpdate();
     }
 }
