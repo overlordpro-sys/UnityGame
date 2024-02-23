@@ -8,8 +8,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(PlayerTimerManager))]
-[RequireComponent(typeof(PlayerRunScript))]
-[RequireComponent(typeof(PlayerJumpScript))]
 [RequireComponent(typeof(PlayerInputScript))]
 [RequireComponent(typeof(PlayerColliderScript))]
 public class Player : NetworkBehaviour, IDamageable {
@@ -19,8 +17,6 @@ public class Player : NetworkBehaviour, IDamageable {
 
     // Child Scripts
     [SerializeField] internal PlayerTimerManager TimerManager;
-    [SerializeField] internal PlayerRunScript RunScript;
-    [SerializeField] internal PlayerJumpScript JumpScript;
     [SerializeField] internal PlayerInputScript InputScript;
     [SerializeField] internal PlayerColliderScript ColliderScript;
 
@@ -34,19 +30,29 @@ public class Player : NetworkBehaviour, IDamageable {
 
     // State Management
     public PlayerStateMachine StateMachine { get; set; }
-    public PlayerIdleState IdleState { get; set; }
+    public PlayerStillState StillState { get; set; }
     public PlayerRunState RunState { get; set; }
     public PlayerJumpState JumpState { get; set; }
     public PlayerClimbState ClimbState { get; set; }
+    public PlayerFallingState FallingState { get; set; }
 
     public override void OnNetworkSpawn() {
+        if (!IsOwner) {
+            return;
+        }
         // State initialization
         StateMachine = new PlayerStateMachine(_movementData);
-        IdleState = new PlayerIdleState(this, StateMachine);
+        StillState = new PlayerStillState(this, StateMachine);
         RunState = new PlayerRunState(this, StateMachine);
         JumpState = new PlayerJumpState(this, StateMachine);
         ClimbState = new PlayerClimbState(this, StateMachine);
-        StateMachine.Initialize(IdleState);
+        FallingState = new PlayerFallingState(this, StateMachine);
+        StateMachine.Initialize(FallingState);
+
+        // Input initialization
+        InputScript.JumpAction.action.started +=
+            ctx => TimerManager.LastPressedJumpTime = _movementData.jumpInputBufferTime;
+
         CurrentHealth = MaxHealth;
     }
 

@@ -17,6 +17,7 @@ public class PlayerMovementData : ScriptableObject {
     [Header("Run")]
     public float runMaxSpeed; // Target speed we want the Player to reach.
     public float runAcceleration; // Time (approx.) time we want it to take for the Player to accelerate from 0 to the runMaxSpeed.
+    public float stillSpeedThreshold; // Target speed we want the Player to reach.
     [HideInInspector] public float runAccelAmount; // Actual force (multiplied with speedDiff) applied to the Player.
     public float runDecceleration; // Time (approx.) we want it to take for the Player to accelerate from runMaxSpeed to 0.
     [HideInInspector] public float runDeccelAmount; // Actual force (multiplied with speedDiff) applied to the Player .

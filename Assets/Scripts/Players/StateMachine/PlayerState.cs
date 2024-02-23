@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerState {
@@ -58,6 +59,10 @@ public class PlayerState {
 
     protected virtual float ModifyTargetSpeed(float targetSpeed) {
         return targetSpeed;
+    }
+
+    protected Boolean CanJump() {
+        return Player.TimerManager.LastOnGroundTime > 0;
     }
 
 

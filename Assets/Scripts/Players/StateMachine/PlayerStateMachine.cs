@@ -19,5 +19,6 @@ public class PlayerStateMachine {
         CurrentPlayerState.ExitState();
         CurrentPlayerState = newState;
         CurrentPlayerState.EnterState();
+        Debug.Log("Changed to " + CurrentPlayerState.ToString());
     }
 }

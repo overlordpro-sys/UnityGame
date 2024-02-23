@@ -16,6 +16,5 @@ public class PlayerTimerManager : NetworkBehaviour {
         // Timers
         LastOnGroundTime -= Time.deltaTime;
         LastPressedJumpTime -= Time.deltaTime;
-
     }
 }
