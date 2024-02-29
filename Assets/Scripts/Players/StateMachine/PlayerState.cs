@@ -8,11 +8,13 @@ public class PlayerState {
     public PlayerState(Player player, PlayerStateMachine stateMachine) {
         this.Player = player;
         this.StateMachine = stateMachine;
+
     }
     public virtual void EnterState() { }
     public virtual void ExitState() { }
 
     public virtual void FrameUpdate() {
+
     }
 
     public virtual void PhysicsUpdate() {
@@ -25,13 +27,6 @@ public class PlayerState {
             accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? StateMachine.MovementData.runAccelAmount : StateMachine.MovementData.runDeccelAmount;
         else
             accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? StateMachine.MovementData.runAccelAmount * StateMachine.MovementData.accelInAir : StateMachine.MovementData.runDeccelAmount * StateMachine.MovementData.deccelInAir;
-
-        ////Increase our acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
-        //if ((_player.JumpScript._isJumping || _player.JumpScript._isJumpFalling) && Mathf.Abs(_player.Body.velocityY) < _data.jumpHangTimeThreshold) {
-        //    accelRate *= _data.jumpHangAccelerationMult;
-        //    targetSpeed *= _data.jumpHangMaxSpeedMult;
-        //}
-
 
         //We won't slow the Player down if they are moving in their desired direction but at a greater speed than their maxSpeed
         //if (_data.doConserveMomentum && Mathf.Abs(_player.Body.velocity.x) > Mathf.Abs(targetSpeed) && Mathf.Sign(_player.Body.velocity.x) == Mathf.Sign(targetSpeed) && Mathf.Abs(targetSpeed) > 0.01f && _player.TimerManager.LastOnGroundTime < 0) {

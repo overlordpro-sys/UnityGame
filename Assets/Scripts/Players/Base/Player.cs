@@ -27,6 +27,8 @@ public class Player : NetworkBehaviour, IDamageable {
     [SerializeField] public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
 
+    internal bool IsFacingRight;
+
 
     // State Management
     public PlayerStateMachine StateMachine { get; set; }
@@ -54,6 +56,7 @@ public class Player : NetworkBehaviour, IDamageable {
             ctx => TimerManager.LastPressedJumpTime = _movementData.jumpInputBufferTime;
 
         CurrentHealth = MaxHealth;
+        IsFacingRight = true;
     }
 
     internal void SetGravityScale(float scale) {

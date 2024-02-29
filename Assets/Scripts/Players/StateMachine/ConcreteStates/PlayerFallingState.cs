@@ -8,7 +8,7 @@ public class PlayerFallingState : PlayerState {
 
     public override void EnterState() {
         Player.SetGravityScale(StateMachine.MovementData.gravityScale * StateMachine.MovementData.fallGravityMult);
-        Player.Body.velocity = new Vector2(Player.Body.velocity.x, Mathf.Min(Player.Body.velocity.y, StateMachine.MovementData.maxFallSpeed));
+        //Player.Body.velocity = new Vector2(Player.Body.velocity.x, Mathf.Min(Player.Body.velocity.y, -StateMachine.MovementData.maxFallSpeed));
         base.EnterState();
     }
 

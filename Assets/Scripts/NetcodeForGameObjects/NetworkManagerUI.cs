@@ -8,6 +8,7 @@ public class NetworkManagerUI : MonoBehaviour {
     [SerializeField] private Button serverBtn;
     [SerializeField] private Button HostBtn;
     [SerializeField] private Button ClientBtn;
+    [SerializeField] private Button StopBtn;
 
     private void Awake() {
         serverBtn.onClick.AddListener(() => {
@@ -18,6 +19,9 @@ public class NetworkManagerUI : MonoBehaviour {
         });
         ClientBtn.onClick.AddListener(() => {
             NetworkManager.Singleton.StartClient();
+        });
+        StopBtn.onClick.AddListener(() => {
+            NetworkManager.Singleton.Shutdown();
         });
     }
 }
