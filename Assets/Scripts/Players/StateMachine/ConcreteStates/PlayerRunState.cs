@@ -15,8 +15,8 @@ public class PlayerRunState : PlayerState {
 
     public override void FrameUpdate() {
         base.FrameUpdate();
-        Player.TimerManager.LastOnGroundTime = StateMachine.MovementData.coyoteTime;
-        if (Mathf.Abs(Player.Body.velocityX) <= StateMachine.MovementData.stillSpeedThreshold && Player.InputScript.MoveDirection.x == 0) {
+        Player.TimerManager.LastOnGroundTime = Player.MovementData.coyoteTime;
+        if (Mathf.Abs(Player.Body.velocityX) <= Player.MovementData.stillSpeedThreshold && Player.InputScript.MoveDirection.x == 0) {
             StateMachine.ChangeState(Player.StillState);
         }
         if (CanJump() && Player.InputScript.JumpAction.action.WasPressedThisFrame()) {

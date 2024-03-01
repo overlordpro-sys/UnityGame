@@ -7,8 +7,7 @@ public class PlayerFallingState : PlayerState {
     }
 
     public override void EnterState() {
-        Player.SetGravityScale(StateMachine.MovementData.gravityScale * StateMachine.MovementData.fallGravityMult);
-        //Player.Body.velocity = new Vector2(Player.Body.velocity.x, Mathf.Min(Player.Body.velocity.y, -StateMachine.MovementData.maxFallSpeed));
+        Player.SetGravityScale(Player.MovementData.gravityScale * Player.MovementData.fallGravityMult);
         base.EnterState();
     }
 
@@ -23,7 +22,7 @@ public class PlayerFallingState : PlayerState {
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
         if (Player.ColliderScript.IsGrounded()) {
-            if (Mathf.Abs(Player.Body.velocityX) <= StateMachine.MovementData.stillSpeedThreshold) {
+            if (Mathf.Abs(Player.Body.velocityX) <= Player.MovementData.stillSpeedThreshold) {
                 StateMachine.ChangeState(Player.StillState);
             }
             else {
@@ -33,6 +32,21 @@ public class PlayerFallingState : PlayerState {
         if (CanJump() && Player.TimerManager.LastPressedJumpTime > 0) {
             StateMachine.ChangeState(Player.JumpState);
         }
+    }
+
+    protected override float ModifyAccel(float accelRate) {
+        //Increase our acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
+        if (Mathf.Abs(Player.Body.velocityY) < Player.MovementData.jumpHangTimeThreshold) {
+            accelRate *= Player.MovementData.jumpHangAccelerationMult;
+        }
+        return accelRate;
+    }
+
+    protected override float ModifyTargetSpeed(float targetSpeed) {
+        if (Mathf.Abs(Player.Body.velocityY) < Player.MovementData.jumpHangTimeThreshold) {
+            targetSpeed *= Player.MovementData.jumpHangMaxSpeedMult;
+        }
+        return targetSpeed;
     }
 
     public override void AnimationTriggerEvent(Player.AnimationTriggerType triggerType) {

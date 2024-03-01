@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2140799209
+  GlobalObjectIdHash: 2542208270
   InScenePlacedSourceGlobalObjectIdHash: 3622011366
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -253,8 +253,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.3339889}
-  m_Size: {x: 1, y: 1.342135}
+  m_Offset: {x: -0.03571859, y: 0.37327945}
+  m_Size: {x: 0.9285628, y: 1.2635539}
   m_Direction: 0
 --- !u!114 &2171701304998014991
 MonoBehaviour:
@@ -349,4 +349,4 @@ MonoBehaviour:
   TimerManager: {fileID: 2171701304998014991}
   InputScript: {fileID: 6429667739947589871}
   ColliderScript: {fileID: -773839004701019347}
-  _movementData: {fileID: 11400000, guid: d905237795b619e478d079317445553c, type: 2}
+  MovementData: {fileID: 11400000, guid: d905237795b619e478d079317445553c, type: 2}

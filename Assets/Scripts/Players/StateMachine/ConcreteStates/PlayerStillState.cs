@@ -8,7 +8,7 @@ public class PlayerStillState : PlayerState {
 
     public override void EnterState() {
         base.EnterState();
-        Player.SetGravityScale(StateMachine.MovementData.gravityScale);
+        Player.SetGravityScale(Player.MovementData.gravityScale);
 
     }
 
@@ -18,7 +18,7 @@ public class PlayerStillState : PlayerState {
 
     public override void FrameUpdate() {
         base.FrameUpdate();
-        Player.TimerManager.LastOnGroundTime = StateMachine.MovementData.coyoteTime;
+        Player.TimerManager.LastOnGroundTime = Player.MovementData.coyoteTime;
         if (Player.InputScript.MoveDirection.x != 0) {
             StateMachine.ChangeState(Player.RunState);
         }

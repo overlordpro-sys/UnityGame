@@ -10,6 +10,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerTimerManager))]
 [RequireComponent(typeof(PlayerInputScript))]
 [RequireComponent(typeof(PlayerColliderScript))]
+[RequireComponent(typeof(PlayerMovementData))]
 public class Player : NetworkBehaviour, IDamageable {
     // Physics objects
     [SerializeField] internal Rigidbody2D Body;
@@ -20,7 +21,7 @@ public class Player : NetworkBehaviour, IDamageable {
     [SerializeField] internal PlayerInputScript InputScript;
     [SerializeField] internal PlayerColliderScript ColliderScript;
 
-    [SerializeField] private PlayerMovementData _movementData;
+    [SerializeField] internal PlayerMovementData MovementData;
 
 
     // Player Stats
@@ -43,7 +44,7 @@ public class Player : NetworkBehaviour, IDamageable {
             return;
         }
         // State initialization
-        StateMachine = new PlayerStateMachine(_movementData);
+        StateMachine = new PlayerStateMachine();
         StillState = new PlayerStillState(this, StateMachine);
         RunState = new PlayerRunState(this, StateMachine);
         JumpState = new PlayerJumpState(this, StateMachine);
@@ -53,7 +54,7 @@ public class Player : NetworkBehaviour, IDamageable {
 
         // Input initialization
         InputScript.JumpAction.action.started +=
-            ctx => TimerManager.LastPressedJumpTime = _movementData.jumpInputBufferTime;
+            ctx => TimerManager.LastPressedJumpTime = MovementData.jumpInputBufferTime;
 
         CurrentHealth = MaxHealth;
         IsFacingRight = true;
