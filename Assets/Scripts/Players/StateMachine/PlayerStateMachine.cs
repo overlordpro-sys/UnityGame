@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStateMachine {
-    public PlayerState CurrentPlayerState { get; set; }
+    internal PlayerState CurrentPlayerState { get; set; }
 
     public void Initialize(PlayerState startingState) {
         CurrentPlayerState = startingState;

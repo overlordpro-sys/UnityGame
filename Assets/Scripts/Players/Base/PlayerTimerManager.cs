@@ -4,8 +4,8 @@ using Unity.Netcode;
 using UnityEngine;
 
 public class PlayerTimerManager : NetworkBehaviour {
-    public float LastPressedJumpTime;
-    public float LastOnGroundTime;
+    internal float LastPressedJumpTime;
+    internal float LastOnGroundTime;
 
     // Update is called once per frame
     void Update() {

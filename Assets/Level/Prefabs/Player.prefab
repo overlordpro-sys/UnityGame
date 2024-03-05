@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5029704097245658979}
   - component: {fileID: 7452529623605601477}
+  - component: {fileID: 8664252460895296337}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -86,6 +87,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8664252460895296337
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2872485595942065081}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4431e21030a6ad74e9f49ecd3e3da7db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3982501487727505640
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,6 +127,7 @@ GameObject:
   - component: {fileID: 271647710029162103}
   - component: {fileID: 6429667739947589871}
   - component: {fileID: -773839004701019347}
+  - component: {fileID: 7943903845309796095}
   - component: {fileID: 7266140773680601055}
   m_Layer: 0
   m_Name: Player
@@ -268,8 +292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec326ebd2bad9a04d858f734e663e57a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LastPressedJumpTime: 0
-  LastOnGroundTime: 0
 --- !u!114 &271647710029162103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +354,18 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &7943903845309796095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982501487727505640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caddce4360c86d409c45cdd02c1edc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7266140773680601055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,4 +383,5 @@ MonoBehaviour:
   TimerManager: {fileID: 2171701304998014991}
   InputScript: {fileID: 6429667739947589871}
   ColliderScript: {fileID: -773839004701019347}
+  AnimationManager: {fileID: 7943903845309796095}
   MovementData: {fileID: 11400000, guid: d905237795b619e478d079317445553c, type: 2}

@@ -7,6 +7,7 @@ public class PlayerRunState : PlayerState {
     }
     public override void EnterState() {
         base.EnterState();
+        Player.AnimationManager.SetAnimation(PlayerAnimationType.Run);
     }
 
     public override void ExitState() {
@@ -17,7 +18,7 @@ public class PlayerRunState : PlayerState {
         base.FrameUpdate();
         Player.TimerManager.LastOnGroundTime = Player.MovementData.coyoteTime;
         if (Mathf.Abs(Player.Body.velocityX) <= Player.MovementData.stillSpeedThreshold && Player.InputScript.MoveDirection.x == 0) {
-            StateMachine.ChangeState(Player.StillState);
+            StateMachine.ChangeState(Player.IdleState);
         }
         if (CanJump() && Player.InputScript.JumpAction.action.WasPressedThisFrame()) {
             StateMachine.ChangeState(Player.JumpState);
@@ -26,7 +27,7 @@ public class PlayerRunState : PlayerState {
 
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
-        if (Player.Body.velocityY < 0) {
+        if (Player.Body.velocityY < -3) {
             StateMachine.ChangeState(Player.FallingState);
         }
     }

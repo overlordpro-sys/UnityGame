@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStillState : PlayerState {
-    public PlayerStillState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine) {
+public class PlayerIdleState : PlayerState {
+    public PlayerIdleState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine) {
     }
 
     public override void EnterState() {
         base.EnterState();
+        Player.AnimationManager.SetAnimation(PlayerAnimationType.Idle);
         Player.SetGravityScale(Player.MovementData.gravityScale);
 
     }

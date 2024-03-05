@@ -17,6 +17,7 @@ public class PlayerJumpState : PlayerState {
     public override void EnterState() {
         base.EnterState();
         Jump();
+        Player.AnimationManager.SetAnimation(PlayerAnimationType.Jump);
         Player.SetGravityScale(Player.MovementData.gravityScale);
 
     }

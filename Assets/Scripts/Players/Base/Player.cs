@@ -10,6 +10,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerTimerManager))]
 [RequireComponent(typeof(PlayerInputScript))]
 [RequireComponent(typeof(PlayerColliderScript))]
+[RequireComponent(typeof(PlayerAnimationManager))]
 [RequireComponent(typeof(PlayerMovementData))]
 public class Player : NetworkBehaviour, IDamageable {
     // Physics objects
@@ -20,7 +21,7 @@ public class Player : NetworkBehaviour, IDamageable {
     [SerializeField] internal PlayerTimerManager TimerManager;
     [SerializeField] internal PlayerInputScript InputScript;
     [SerializeField] internal PlayerColliderScript ColliderScript;
-
+    [SerializeField] internal PlayerAnimationManager AnimationManager;
     [SerializeField] internal PlayerMovementData MovementData;
 
 
@@ -28,16 +29,15 @@ public class Player : NetworkBehaviour, IDamageable {
     [SerializeField] public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
 
-    internal bool IsFacingRight;
-
 
     // State Management
-    public PlayerStateMachine StateMachine { get; set; }
-    public PlayerStillState StillState { get; set; }
-    public PlayerRunState RunState { get; set; }
-    public PlayerJumpState JumpState { get; set; }
-    public PlayerClimbState ClimbState { get; set; }
-    public PlayerFallingState FallingState { get; set; }
+    internal PlayerStateMachine StateMachine { get; set; }
+    internal PlayerIdleState IdleState { get; set; }
+    internal PlayerRunState RunState { get; set; }
+    internal PlayerJumpState JumpState { get; set; }
+    internal PlayerClimbState ClimbState { get; set; }
+    internal PlayerFallingState FallingState { get; set; }
+
 
     public override void OnNetworkSpawn() {
         if (!IsOwner) {
@@ -45,7 +45,7 @@ public class Player : NetworkBehaviour, IDamageable {
         }
         // State initialization
         StateMachine = new PlayerStateMachine();
-        StillState = new PlayerStillState(this, StateMachine);
+        IdleState = new PlayerIdleState(this, StateMachine);
         RunState = new PlayerRunState(this, StateMachine);
         JumpState = new PlayerJumpState(this, StateMachine);
         ClimbState = new PlayerClimbState(this, StateMachine);
@@ -56,8 +56,8 @@ public class Player : NetworkBehaviour, IDamageable {
         InputScript.JumpAction.action.started +=
             ctx => TimerManager.LastPressedJumpTime = MovementData.jumpInputBufferTime;
 
+
         CurrentHealth = MaxHealth;
-        IsFacingRight = true;
     }
 
     internal void SetGravityScale(float scale) {

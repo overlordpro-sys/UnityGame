@@ -8,6 +8,7 @@ public class PlayerFallingState : PlayerState {
 
     public override void EnterState() {
         Player.SetGravityScale(Player.MovementData.gravityScale * Player.MovementData.fallGravityMult);
+        Player.AnimationManager.SetAnimation(PlayerAnimationType.Fall);
         base.EnterState();
     }
 
@@ -23,7 +24,7 @@ public class PlayerFallingState : PlayerState {
         base.PhysicsUpdate();
         if (Player.ColliderScript.IsGrounded()) {
             if (Mathf.Abs(Player.Body.velocityX) <= Player.MovementData.stillSpeedThreshold) {
-                StateMachine.ChangeState(Player.StillState);
+                StateMachine.ChangeState(Player.IdleState);
             }
             else {
                 StateMachine.ChangeState(Player.RunState);
