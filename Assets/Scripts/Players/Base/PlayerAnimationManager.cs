@@ -15,10 +15,6 @@ public struct PlayerAnimationType {
 public class PlayerAnimationManager : NetworkBehaviour {
     internal Animator Animator { get; set; }
     public override void OnNetworkSpawn() {
-        if (!IsOwner) {
-            return;
-        }
-
         Animator = transform.Find("Sprite").GetComponent<Animator>();
     }
 
@@ -26,6 +22,16 @@ public class PlayerAnimationManager : NetworkBehaviour {
         if (!IsOwner) {
             return;
         }
+        AnimationServerRpc(NetworkObjectId, animationName);
+    }
+
+    [Rpc(SendTo.Server)]
+    void AnimationServerRpc(ulong sourceNetworkObjectId, string animationName) {
+        AnimationClientRpc(sourceNetworkObjectId, animationName);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void AnimationClientRpc(ulong sourceNetworkObjectId, string animationName) {
         Animator.Play(animationName);
     }
 
