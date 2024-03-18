@@ -20,4 +20,8 @@ public class PlayerColliderScript : NetworkBehaviour {
     internal bool IsGrounded() {
         return Physics2D.BoxCast(_player.Body.position, new Vector2(_player.Collider.bounds.extents.x * 2 + _groundBoxXOffset, _groundBoxY), 0, Vector2.down, _player.Collider.bounds.extents.y, _groundLayer);
     }
+
+    internal void OnDrawGizmos() {
+        Gizmos.DrawWireCube(_player.Body.position + Vector2.down * _player.Collider.bounds.extents.y, new Vector2(_player.Collider.bounds.extents.x * 2 + _groundBoxXOffset, _groundBoxY));
+    }
 }

@@ -30,9 +30,6 @@ public class PlayerFallingState : PlayerState {
                 StateMachine.ChangeState(Player.RunState);
             }
         }
-        if (CanJump() && Player.TimerManager.LastPressedJumpTime > 0) {
-            StateMachine.ChangeState(Player.JumpState);
-        }
     }
 
     protected override float ModifyAccel(float accelRate) {

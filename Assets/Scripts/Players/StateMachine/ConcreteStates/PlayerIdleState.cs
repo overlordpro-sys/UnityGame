@@ -23,7 +23,7 @@ public class PlayerIdleState : PlayerState {
         if (Player.InputScript.MoveDirection.x != 0) {
             StateMachine.ChangeState(Player.RunState);
         }
-        if (CanJump() && Player.InputScript.JumpAction.action.WasPressedThisFrame()) {
+        if (CanJump() && Player.TimerManager.LastPressedJumpTime > 0) {
             StateMachine.ChangeState(Player.JumpState);
         }
 

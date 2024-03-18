@@ -20,7 +20,7 @@ public class PlayerState {
     public virtual void PhysicsUpdate() {
         Vector3 scale = Player.transform.localScale;
         // check if scale.x and MoveDirection.x don't have the same sign
-        if (scale.x * Player.InputScript.MoveDirection.x < 0) {
+        if (scale.x * Player.InputScript.MoveDirection.x > 0) {
             scale.x *= -1;
             Player.transform.localScale = scale;
         }

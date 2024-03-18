@@ -8,7 +8,7 @@ public struct PlayerAnimationType {
     public const string Run = "Base Layer.Run";
     public const string Jump = "Base Layer.Jump";
     public const string Climb = "Base Layer.Climb";
-    public const string Fall = "Base Layer.Fall";
+    public const string Fall = "Base Layer.Jump";
 
 }
 

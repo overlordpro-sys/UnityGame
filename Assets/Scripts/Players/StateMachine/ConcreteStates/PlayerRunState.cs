@@ -20,7 +20,7 @@ public class PlayerRunState : PlayerState {
         if (Mathf.Abs(Player.Body.velocityX) <= Player.MovementData.stillSpeedThreshold && Player.InputScript.MoveDirection.x == 0) {
             StateMachine.ChangeState(Player.IdleState);
         }
-        if (CanJump() && Player.InputScript.JumpAction.action.WasPressedThisFrame()) {
+        if (CanJump() && Player.TimerManager.LastPressedJumpTime > 0) {
             StateMachine.ChangeState(Player.JumpState);
         }
     }

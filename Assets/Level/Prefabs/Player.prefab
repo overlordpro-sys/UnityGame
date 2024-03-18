@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 2872485595942065081}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.58, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 0.3846154}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.038461544}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4926675608993810193}
@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 120357241
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 72de0c64f2c6a498096698322c976a67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce7b3baa5bac4c5f908f345eea062c67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 33, y: 33}
+  m_Size: {x: 3.6, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -97,7 +97,7 @@ Animator:
   m_GameObject: {fileID: 2872485595942065081}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4431e21030a6ad74e9f49ecd3e3da7db, type: 2}
+  m_Controller: {fileID: 9100000, guid: b45f1b34648ef094280c9afafe57a914, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -123,12 +123,12 @@ GameObject:
   - component: {fileID: 177080592760270954}
   - component: {fileID: -4160834534928867093}
   - component: {fileID: -8175786311164958099}
+  - component: {fileID: 7266140773680601055}
   - component: {fileID: 2171701304998014991}
   - component: {fileID: 271647710029162103}
   - component: {fileID: 6429667739947589871}
   - component: {fileID: -773839004701019347}
   - component: {fileID: 7943903845309796095}
-  - component: {fileID: 7266140773680601055}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2542208270
+  GlobalObjectIdHash: 3622011366
   InScenePlacedSourceGlobalObjectIdHash: 3622011366
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -277,9 +277,28 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.03571859, y: 0.37327945}
-  m_Size: {x: 0.9285628, y: 1.2635539}
+  m_Offset: {x: 0.00055772066, y: -0.14408946}
+  m_Size: {x: 0.6282346, y: 0.9126363}
   m_Direction: 0
+--- !u!114 &7266140773680601055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982501487727505640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6b306382f3ad3479adc4ebae23e570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Body: {fileID: 177080592760270954}
+  Collider: {fileID: -8175786311164958099}
+  TimerManager: {fileID: 2171701304998014991}
+  InputScript: {fileID: 6429667739947589871}
+  ColliderScript: {fileID: -773839004701019347}
+  AnimationManager: {fileID: 7943903845309796095}
+  MovementData: {fileID: 11400000, guid: d905237795b619e478d079317445553c, type: 2}
 --- !u!114 &2171701304998014991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 7266140773680601055}
   _groundBoxXOffset: 0
-  _groundBoxY: 2
+  _groundBoxY: 0.5
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -366,22 +385,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4caddce4360c86d409c45cdd02c1edc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7266140773680601055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3982501487727505640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d6b306382f3ad3479adc4ebae23e570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Body: {fileID: 177080592760270954}
-  Collider: {fileID: -8175786311164958099}
-  TimerManager: {fileID: 2171701304998014991}
-  InputScript: {fileID: 6429667739947589871}
-  ColliderScript: {fileID: -773839004701019347}
-  AnimationManager: {fileID: 7943903845309796095}
-  MovementData: {fileID: 11400000, guid: d905237795b619e478d079317445553c, type: 2}
