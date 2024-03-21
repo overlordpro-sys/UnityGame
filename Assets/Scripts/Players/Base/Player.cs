@@ -10,7 +10,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerTimerManager))]
 [RequireComponent(typeof(PlayerInputScript))]
 [RequireComponent(typeof(PlayerColliderScript))]
-[RequireComponent(typeof(PlayerAnimationManager))]
 [RequireComponent(typeof(PlayerMovementData))]
 public class Player : NetworkBehaviour, IDamageable {
     // Physics objects
