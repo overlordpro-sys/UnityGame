@@ -14,36 +14,6 @@ public struct PlayerAnimationType {
     public const string Fall = "Base Layer.Jump";
 }
 
-public class ResourcePathAttribute : Attribute {
-    public string Path { get; private set; }
-
-    public ResourcePathAttribute(string path) {
-        this.Path = path;
-    }
-
-    public static string GetResourcePath(Enum Value) {
-        Type Type = Value.GetType();
-
-        FieldInfo FieldInfo = Type.GetField(Value.ToString());
-
-        ResourcePathAttribute Attribute = FieldInfo.GetCustomAttribute(
-            typeof(ResourcePathAttribute)
-        ) as ResourcePathAttribute;
-
-        return Attribute.Path;
-    }
-}
-
-public enum PlayerVariant {
-    [ResourcePath("Controllers/Variant A")]
-    A,
-    [ResourcePath("Controllers/Variant B")]
-    B,
-    [ResourcePath("Controllers/Variant C")]
-    C,
-    [ResourcePath("Controllers/Variant D")]
-    D
-}
 
 public class PlayerAnimationManager : NetworkBehaviour {
     private Animator Animator { get; set; }
@@ -54,12 +24,12 @@ public class PlayerAnimationManager : NetworkBehaviour {
 
     public override void OnNetworkSpawn() {
         if (IsOwner) {
-            DebugLogConsole.AddCommandInstance("player.setvariant", "Set the player's animation variant", "SetAnimationControllerServerRpc", this);
+            DebugLogConsole.AddCommandInstance("playerBase.setvariant", "Set the playerBase's animation character", "SetAnimationControllerServerRpc", this);
         }
     }
 
-    public void SetAnimationOverrideControllerFromResources(PlayerVariant variant) {
-        SetAnimationControllerServerRpc(ResourcePathAttribute.GetResourcePath(variant));
+    public void SetAnimationOverrideControllerFromResources(PlayerCharacter character) {
+        SetAnimationControllerServerRpc(ResourcePathAttribute.GetResourcePath(character));
     }
 
     [Rpc(SendTo.Server)]

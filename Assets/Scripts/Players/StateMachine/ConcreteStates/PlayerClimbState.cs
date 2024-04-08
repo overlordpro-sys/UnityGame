@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerClimbState : PlayerState {
-    public PlayerClimbState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine) {
+    public PlayerClimbState(PlayerBase playerBase, PlayerStateMachine stateMachine) : base(playerBase, stateMachine) {
     }
 
     public override void EnterState() {
@@ -22,7 +22,7 @@ public class PlayerClimbState : PlayerState {
         base.PhysicsUpdate();
     }
 
-    public override void AnimationTriggerEvent(Player.AnimationTriggerType triggerType) {
+    public override void AnimationTriggerEvent(PlayerBase.AnimationTriggerType triggerType) {
         base.AnimationTriggerEvent(triggerType);
     }
 }

@@ -1,26 +1,26 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PlayerScro[t Run Data")] //Create a new playerData object by right clicking in the Project Menu then Create/Player/Player Data and drag onto the Player
+[CreateAssetMenu(menuName = "PlayerScro[t Run Data")] //Create a new playerData object by right clicking in the Project Menu then Create/PlayerBase/PlayerBase Data and drag onto the PlayerBase
 public class PlayerMovementData : ScriptableObject {
     [Header("Gravity")]
     [HideInInspector] public float gravityStrength; //Downwards force (gravity) needed for the desired jumpHeight and jumpTimeToApex.
-    [HideInInspector] public float gravityScale; //Strength of the Player's gravity as a multiplier of gravity (set in ProjectSettings/Physics2D).
-                                                 //Also the value the Player's rigidbody2D.gravityScale is set to.
+    [HideInInspector] public float gravityScale; //Strength of the PlayerBase's gravity as a multiplier of gravity (set in ProjectSettings/Physics2D).
+                                                 //Also the value the PlayerBase's rigidbody2D.gravityScale is set to.
     [Space(5)]
-    public float fallGravityMult; //Multiplier to the Player's gravityScale when falling.
-    public float maxFallSpeed; //Maximum fall speed (terminal velocity) of the Player when falling.
+    public float fallGravityMult; //Multiplier to the PlayerBase's gravityScale when falling.
+    public float maxFallSpeed; //Maximum fall speed (terminal velocity) of the PlayerBase when falling.
     [Space(5)]
-    public float fastFallGravityMult; //Larger multiplier to the Player's gravityScale when they are falling and a downwards input is pressed.
-                                      //Seen in games such as Celeste, lets the Player fall extra fast if they wish.
-    public float maxFastFallSpeed; //Maximum fall speed(terminal velocity) of the Player when performing a faster fall.
+    public float fastFallGravityMult; //Larger multiplier to the PlayerBase's gravityScale when they are falling and a downwards input is pressed.
+                                      //Seen in games such as Celeste, lets the PlayerBase fall extra fast if they wish.
+    public float maxFastFallSpeed; //Maximum fall speed(terminal velocity) of the PlayerBase when performing a faster fall.
 
     [Header("Run")]
-    public float runMaxSpeed; // Target speed we want the Player to reach.
-    public float runAcceleration; // Time (approx.) time we want it to take for the Player to accelerate from 0 to the runMaxSpeed.
-    public float stillSpeedThreshold; // Target speed we want the Player to reach.
-    [HideInInspector] public float runAccelAmount; // Actual force (multiplied with speedDiff) applied to the Player.
-    public float runDecceleration; // Time (approx.) we want it to take for the Player to accelerate from runMaxSpeed to 0.
-    [HideInInspector] public float runDeccelAmount; // Actual force (multiplied with speedDiff) applied to the Player .
+    public float runMaxSpeed; // Target speed we want the PlayerBase to reach.
+    public float runAcceleration; // Time (approx.) time we want it to take for the PlayerBase to accelerate from 0 to the runMaxSpeed.
+    public float stillSpeedThreshold; // Target speed we want the PlayerBase to reach.
+    [HideInInspector] public float runAccelAmount; // Actual force (multiplied with speedDiff) applied to the PlayerBase.
+    public float runDecceleration; // Time (approx.) we want it to take for the PlayerBase to accelerate from runMaxSpeed to 0.
+    [HideInInspector] public float runDeccelAmount; // Actual force (multiplied with speedDiff) applied to the PlayerBase .
     [Space(10)]
     [Range(0.01f, 1)] public float accelInAir; //Multipliers applied to acceleration rate when airborne.
     [Range(0.01f, 1)] public float deccelInAir;
@@ -29,14 +29,14 @@ public class PlayerMovementData : ScriptableObject {
     [Space(20)]
 
     [Header("Jump")]
-    public float jumpHeight; //Height of the Player's jump
-    public float jumpTimeToApex; //Time between applying the jump force and reaching the desired jump height. These values also control the Player's gravity and jump force.
-    [HideInInspector] public float jumpForce; //The actual force applied (upwards) to the Player when they jump.
+    public float jumpHeight; //Height of the PlayerBase's jump
+    public float jumpTimeToApex; //Time between applying the jump force and reaching the desired jump height. These values also control the PlayerBase's gravity and jump force.
+    [HideInInspector] public float jumpForce; //The actual force applied (upwards) to the PlayerBase when they jump.
 
     [Header("Both Jumps")]
-    public float jumpCutGravityMult; //Multiplier to increase gravity if the Player releases thje jump button while still jumping
+    public float jumpCutGravityMult; //Multiplier to increase gravity if the PlayerBase releases thje jump button while still jumping
     [Range(0f, 1)] public float jumpHangGravityMult; //Reduces gravity while close to the apex (desired max height) of the jump
-    public float jumpHangTimeThreshold; //Speeds (close to 0) where the Player will experience extra "jump hang". The Player's velocity.y is closest to 0 at the jump's apex (think of the gradient of a parabola or quadratic function)
+    public float jumpHangTimeThreshold; //Speeds (close to 0) where the PlayerBase will experience extra "jump hang". The PlayerBase's velocity.y is closest to 0 at the jump's apex (think of the gradient of a parabola or quadratic function)
     [Space(0.5f)]
     public float jumpHangAccelerationMult;
     public float jumpHangMaxSpeedMult;

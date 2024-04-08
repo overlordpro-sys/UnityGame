@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerRunState : PlayerState {
-    public PlayerRunState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine) {
+    public PlayerRunState(PlayerBase playerBase, PlayerStateMachine stateMachine) : base(playerBase, stateMachine) {
     }
     public override void EnterState() {
         base.EnterState();
-        Player.AnimationManager.SetAnimation(PlayerAnimationType.Run);
+        PlayerBase.AnimationManager.SetAnimation(PlayerAnimationType.Run);
     }
 
     public override void ExitState() {
@@ -16,23 +16,23 @@ public class PlayerRunState : PlayerState {
 
     public override void FrameUpdate() {
         base.FrameUpdate();
-        Player.TimerManager.LastOnGroundTime = Player.MovementData.coyoteTime;
-        if (Mathf.Abs(Player.Body.velocityX) <= Player.MovementData.stillSpeedThreshold && Player.InputScript.MoveDirection.x == 0) {
-            StateMachine.ChangeState(Player.IdleState);
+        PlayerBase.TimerManager.LastOnGroundTime = PlayerBase.MovementData.coyoteTime;
+        if (Mathf.Abs(PlayerBase.Body.velocityX) <= PlayerBase.MovementData.stillSpeedThreshold && PlayerBase.InputScript.MoveDirection.x == 0) {
+            StateMachine.ChangeState(PlayerBase.IdleState);
         }
-        if (CanJump() && Player.TimerManager.LastPressedJumpTime > 0) {
-            StateMachine.ChangeState(Player.JumpState);
+        if (CanJump() && PlayerBase.TimerManager.LastPressedJumpTime > 0) {
+            StateMachine.ChangeState(PlayerBase.JumpState);
         }
     }
 
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
-        if (Player.Body.velocityY < -3) {
-            StateMachine.ChangeState(Player.FallingState);
+        if (PlayerBase.Body.velocityY < -3) {
+            StateMachine.ChangeState(PlayerBase.FallingState);
         }
     }
 
-    public override void AnimationTriggerEvent(Player.AnimationTriggerType triggerType) {
+    public override void AnimationTriggerEvent(PlayerBase.AnimationTriggerType triggerType) {
         base.AnimationTriggerEvent(triggerType);
     }
 }

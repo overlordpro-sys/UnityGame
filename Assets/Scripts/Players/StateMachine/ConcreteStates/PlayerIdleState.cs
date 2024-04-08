@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerIdleState : PlayerState {
-    public PlayerIdleState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine) {
+    public PlayerIdleState(PlayerBase playerBase, PlayerStateMachine stateMachine) : base(playerBase, stateMachine) {
     }
 
     public override void EnterState() {
         base.EnterState();
-        Player.AnimationManager.SetAnimation(PlayerAnimationType.Idle);
-        Player.SetGravityScale(Player.MovementData.gravityScale);
+        PlayerBase.AnimationManager.SetAnimation(PlayerAnimationType.Idle);
+        PlayerBase.SetGravityScale(PlayerBase.MovementData.gravityScale);
 
     }
 
@@ -19,12 +19,12 @@ public class PlayerIdleState : PlayerState {
 
     public override void FrameUpdate() {
         base.FrameUpdate();
-        Player.TimerManager.LastOnGroundTime = Player.MovementData.coyoteTime;
-        if (Player.InputScript.MoveDirection.x != 0) {
-            StateMachine.ChangeState(Player.RunState);
+        PlayerBase.TimerManager.LastOnGroundTime = PlayerBase.MovementData.coyoteTime;
+        if (PlayerBase.InputScript.MoveDirection.x != 0) {
+            StateMachine.ChangeState(PlayerBase.RunState);
         }
-        if (CanJump() && Player.TimerManager.LastPressedJumpTime > 0) {
-            StateMachine.ChangeState(Player.JumpState);
+        if (CanJump() && PlayerBase.TimerManager.LastPressedJumpTime > 0) {
+            StateMachine.ChangeState(PlayerBase.JumpState);
         }
 
     }
@@ -34,7 +34,7 @@ public class PlayerIdleState : PlayerState {
 
     }
 
-    public override void AnimationTriggerEvent(Player.AnimationTriggerType triggerType) {
+    public override void AnimationTriggerEvent(PlayerBase.AnimationTriggerType triggerType) {
         base.AnimationTriggerEvent(triggerType);
     }
 }

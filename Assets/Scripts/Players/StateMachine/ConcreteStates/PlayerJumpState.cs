@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerJumpState : PlayerState {
-    public PlayerJumpState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine) {
+    public PlayerJumpState(PlayerBase playerBase, PlayerStateMachine stateMachine) : base(playerBase, stateMachine) {
     }
 
     private void Jump() {
-        Player.TimerManager.LastPressedJumpTime = 0;
-        Player.TimerManager.LastOnGroundTime = 0;
-        Player.Body.velocityY = 0;
+        PlayerBase.TimerManager.LastPressedJumpTime = 0;
+        PlayerBase.TimerManager.LastOnGroundTime = 0;
+        PlayerBase.Body.velocityY = 0;
 
-        Player.Body.AddForceY(Player.MovementData.jumpForce, ForceMode2D.Impulse);
+        PlayerBase.Body.AddForceY(PlayerBase.MovementData.jumpForce, ForceMode2D.Impulse);
     }
 
     public override void EnterState() {
         base.EnterState();
         Jump();
-        Player.AnimationManager.SetAnimation(PlayerAnimationType.Jump);
-        Player.SetGravityScale(Player.MovementData.gravityScale);
+        PlayerBase.AnimationManager.SetAnimation(PlayerAnimationType.Jump);
+        PlayerBase.SetGravityScale(PlayerBase.MovementData.gravityScale);
 
     }
 
@@ -28,40 +28,40 @@ public class PlayerJumpState : PlayerState {
 
     public override void FrameUpdate() {
         base.FrameUpdate();
-        if (Player.Body.velocityY > 0 && Player.InputScript.JumpAction.action.WasReleasedThisFrame()) {
-            StateMachine.ChangeState(Player.FallingState);
-            Player.SetGravityScale(Player.MovementData.gravityScale * Player.MovementData.jumpCutGravityMult);
-            Player.Body.velocity = new Vector2(Player.Body.velocity.x, Mathf.Min(Player.Body.velocity.y, -Player.MovementData.maxFallSpeed));
+        if (PlayerBase.Body.velocityY > 0 && PlayerBase.InputScript.JumpAction.action.WasReleasedThisFrame()) {
+            StateMachine.ChangeState(PlayerBase.FallingState);
+            PlayerBase.SetGravityScale(PlayerBase.MovementData.gravityScale * PlayerBase.MovementData.jumpCutGravityMult);
+            PlayerBase.Body.velocity = new Vector2(PlayerBase.Body.velocity.x, Mathf.Min(PlayerBase.Body.velocity.y, -PlayerBase.MovementData.maxFallSpeed));
         }
     }
 
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
         if (IsJumpHang()) {
-            Player.SetGravityScale(Player.MovementData.gravityScale * Player.MovementData.jumpHangGravityMult);
+            PlayerBase.SetGravityScale(PlayerBase.MovementData.gravityScale * PlayerBase.MovementData.jumpHangGravityMult);
         }
-        if (Player.Body.velocityY < 0) {
-            StateMachine.ChangeState(Player.FallingState);
+        if (PlayerBase.Body.velocityY < 0) {
+            StateMachine.ChangeState(PlayerBase.FallingState);
         }
     }
 
     protected override float ModifyAccel(float accelRate) {
         //Increase our acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
         if (IsJumpHang()) {
-            accelRate *= Player.MovementData.jumpHangAccelerationMult;
+            accelRate *= PlayerBase.MovementData.jumpHangAccelerationMult;
         }
         return accelRate;
     }
 
     protected override float ModifyTargetSpeed(float targetSpeed) {
         if (IsJumpHang()) {
-            targetSpeed *= Player.MovementData.jumpHangMaxSpeedMult;
+            targetSpeed *= PlayerBase.MovementData.jumpHangMaxSpeedMult;
         }
         return targetSpeed;
     }
 
 
-    public override void AnimationTriggerEvent(Player.AnimationTriggerType triggerType) {
+    public override void AnimationTriggerEvent(PlayerBase.AnimationTriggerType triggerType) {
         base.AnimationTriggerEvent(triggerType);
     }
 }

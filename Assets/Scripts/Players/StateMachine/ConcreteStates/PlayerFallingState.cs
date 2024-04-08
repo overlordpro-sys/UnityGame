@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFallingState : PlayerState {
-    public PlayerFallingState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine) {
+    public PlayerFallingState(PlayerBase playerBase, PlayerStateMachine stateMachine) : base(playerBase, stateMachine) {
     }
 
     public override void EnterState() {
-        Player.SetGravityScale(Player.MovementData.gravityScale * Player.MovementData.fallGravityMult);
-        Player.AnimationManager.SetAnimation(PlayerAnimationType.Fall);
+        PlayerBase.SetGravityScale(PlayerBase.MovementData.gravityScale * PlayerBase.MovementData.fallGravityMult);
+        PlayerBase.AnimationManager.SetAnimation(PlayerAnimationType.Fall);
         base.EnterState();
     }
 
@@ -22,32 +22,32 @@ public class PlayerFallingState : PlayerState {
 
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
-        if (Player.ColliderScript.IsGrounded()) {
-            if (Mathf.Abs(Player.Body.velocityX) <= Player.MovementData.stillSpeedThreshold) {
-                StateMachine.ChangeState(Player.IdleState);
+        if (PlayerBase.ColliderScript.IsGrounded()) {
+            if (Mathf.Abs(PlayerBase.Body.velocityX) <= PlayerBase.MovementData.stillSpeedThreshold) {
+                StateMachine.ChangeState(PlayerBase.IdleState);
             }
             else {
-                StateMachine.ChangeState(Player.RunState);
+                StateMachine.ChangeState(PlayerBase.RunState);
             }
         }
     }
 
     protected override float ModifyAccel(float accelRate) {
         //Increase our acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
-        if (Mathf.Abs(Player.Body.velocityY) < Player.MovementData.jumpHangTimeThreshold) {
-            accelRate *= Player.MovementData.jumpHangAccelerationMult;
+        if (Mathf.Abs(PlayerBase.Body.velocityY) < PlayerBase.MovementData.jumpHangTimeThreshold) {
+            accelRate *= PlayerBase.MovementData.jumpHangAccelerationMult;
         }
         return accelRate;
     }
 
     protected override float ModifyTargetSpeed(float targetSpeed) {
-        if (Mathf.Abs(Player.Body.velocityY) < Player.MovementData.jumpHangTimeThreshold) {
-            targetSpeed *= Player.MovementData.jumpHangMaxSpeedMult;
+        if (Mathf.Abs(PlayerBase.Body.velocityY) < PlayerBase.MovementData.jumpHangTimeThreshold) {
+            targetSpeed *= PlayerBase.MovementData.jumpHangMaxSpeedMult;
         }
         return targetSpeed;
     }
 
-    public override void AnimationTriggerEvent(Player.AnimationTriggerType triggerType) {
+    public override void AnimationTriggerEvent(PlayerBase.AnimationTriggerType triggerType) {
         base.AnimationTriggerEvent(triggerType);
     }
 }

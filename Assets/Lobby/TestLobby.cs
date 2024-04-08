@@ -23,10 +23,10 @@ public class TestLobby : MonoBehaviour {
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-        DebugLogConsole.AddCommand("lobby.create", "Creates a test lobby", CreateLobby);
-        DebugLogConsole.AddCommand("lobby.list", "List lobbies", ListLobbies);
-        DebugLogConsole.AddCommand("lobby.join_first", "Join first lobby", JoinLobbyFirst);
-        DebugLogConsole.AddCommand<string>("lobby.join_code", "Join lobby by code", JoinLobbyByCode);
+        //DebugLogConsole.AddCommand("lobby.create", "Creates a test lobby", CreateLobby);
+        //DebugLogConsole.AddCommand("lobby.list", "List lobbies", ListLobbies);
+        //DebugLogConsole.AddCommand("lobby.join_first", "Join first lobby", JoinLobbyFirst);
+        //DebugLogConsole.AddCommand<string>("lobby.join_code", "Join lobby by code", JoinLobbyByCode);
     }
 
     private void Update() {

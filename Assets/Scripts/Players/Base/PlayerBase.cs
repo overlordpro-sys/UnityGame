@@ -11,7 +11,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInputScript))]
 [RequireComponent(typeof(PlayerColliderScript))]
 [RequireComponent(typeof(PlayerMovementData))]
-public class Player : NetworkBehaviour, IDamageable {
+public class PlayerBase : NetworkBehaviour, IDamageable {
     // Physics objects
     [SerializeField] internal Rigidbody2D Body;
     [SerializeField] internal Collider2D Collider;
@@ -24,7 +24,7 @@ public class Player : NetworkBehaviour, IDamageable {
     [SerializeField] internal PlayerMovementData MovementData;
 
 
-    // Player Stats
+    // PlayerBase Stats
     [SerializeField] public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
 
