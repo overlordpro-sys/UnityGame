@@ -1,4 +1,5 @@
-using System;using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -26,36 +27,29 @@ public class LobbyManager : MonoBehaviour {
     public class OnLobbyListChangedEventArgs : EventArgs {
         public List<Lobby> lobbyList;
     }
-
-    public static LobbyManager Instance;
+    public static LobbyManager Instance { get; private set; }
 
 
 
     private Lobby joinedLobby;
-    private string _playerName;
+    private string _playerName = "Player";
     private PlayerCharacter _playerCharacter;
 
     void Awake() {
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        DebugLogConsole.AddCommand<string>("player.authenticate", "Authenticate player", Authenticate);
+        DebugLogConsole.AddCommand("player.authenticate", "Authenticate player", Authenticate);
         DebugLogConsole.AddCommand<string, int, bool>("lobby.create", "Create a lobby", CreateLobby);
         //DebugLogConsole.AddCommand("lobby.list", "List lobbies", ListLobbies);
         //DebugLogConsole.AddCommand("lobby.join_first", "Join first lobby", JoinLobbyFirst);
         //DebugLogConsole.AddCommand<string>("lobby.join_code", "Join lobby by code", JoinLobbyByCode);
     }
 
+    public async void Authenticate() {
 
-
-public async void Authenticate(string playerName) {
-        this._playerName = playerName;
-        InitializationOptions initializationOptions = new InitializationOptions();
-        initializationOptions.SetProfile(playerName);
-
-        await UnityServices.InitializeAsync(initializationOptions);
+        await UnityServices.InitializeAsync();
 
         AuthenticationService.Instance.SignedIn += () => {
-            // do nothing
             Debug.Log("Signed in! " + AuthenticationService.Instance.PlayerId);
         };
 
@@ -109,7 +103,7 @@ public async void Authenticate(string playerName) {
         }
     }
 
-    
+
 
 
     public async void UpdatePlayerName(string playerName) {
@@ -166,9 +160,7 @@ public async void Authenticate(string playerName) {
         }
     }
 
-
     // Lobby Actions
-
     public async void JoinLobbyByCode(string lobbyCode) {
         Player player = GetPlayer();
 
