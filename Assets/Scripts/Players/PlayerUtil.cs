@@ -34,10 +34,3 @@ public class ResourcePathAttribute : Attribute {
         return Attribute.Path;
     }
 }
-
-// NGO
-public class PlayerDataKeys {
-    public const string PlayerName = "PlayerName";
-    public const string PlayerCharacter = "PlayerCharacter";
-    public const string PlayerLobby = "GameMode";
-}

@@ -11,7 +11,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInputScript))]
 [RequireComponent(typeof(PlayerColliderScript))]
 [RequireComponent(typeof(PlayerMovementData))]
-public class PlayerBase : NetworkBehaviour, IDamageable {
+public class PlayerBase : NetworkBehaviour, IDamageable
+{
     // Physics objects
     [SerializeField] internal Rigidbody2D Body;
     [SerializeField] internal Collider2D Collider;
@@ -38,8 +39,10 @@ public class PlayerBase : NetworkBehaviour, IDamageable {
     internal PlayerFallingState FallingState { get; set; }
 
 
-    public override void OnNetworkSpawn() {
-        if (!IsOwner) {
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner)
+        {
             return;
         }
         // State initialization
@@ -59,42 +62,52 @@ public class PlayerBase : NetworkBehaviour, IDamageable {
         CurrentHealth = MaxHealth;
     }
 
-    internal void SetGravityScale(float scale) {
+    internal void SetGravityScale(float scale)
+    {
         Body.gravityScale = scale;
     }
 
-    public void Damage(float damageAmount) {
+    public void Damage(float damageAmount)
+    {
         CurrentHealth -= damageAmount;
-        if (CurrentHealth <= 0) {
+        if (CurrentHealth <= 0)
+        {
             Die();
         }
     }
 
-    public void Die() {
+    public void Die()
+    {
         // TODO: Implement death
     }
 
     // AnimationTriggers
-    public enum AnimationTriggerType {
+    public enum AnimationTriggerType
+    {
         PlayerDamaged,
         PlayFootstepSound,
     }
 
-    private void AnimationTriggerEvent(AnimationTriggerType triggerType) {
+    private void AnimationTriggerEvent(AnimationTriggerType triggerType)
+    {
         StateMachine.CurrentPlayerState.AnimationTriggerEvent(triggerType);
     }
 
     // Update is called once per frame
-    void Update() {
-        if (!IsOwner) {
+    private void Update()
+    {
+        if (!IsOwner)
+        {
             return;
         }
 
         StateMachine.CurrentPlayerState.FrameUpdate();
     }
 
-    private void FixedUpdate() {
-        if (!IsOwner) {
+    private void FixedUpdate()
+    {
+        if (!IsOwner)
+        {
             return;
         }
         StateMachine.CurrentPlayerState.PhysicsUpdate();

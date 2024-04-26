@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
-{
+public class UIManager : MonoBehaviour {
     public static UIManager Instance { get; private set; }
 
     [Header("UI Screens")]
@@ -11,8 +10,8 @@ public class UIManager : MonoBehaviour
     public GameObject mainMenu;
     [Tooltip("The lobby screen")]
     public GameObject lobbyMenu;
-    void Awake()
-    {
+
+    private void Awake() {
         Instance = this;
         mainMenu.SetActive(true);
         lobbyMenu.SetActive(false);
@@ -29,8 +28,7 @@ public class UIManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    private void Update() {
+
     }
 }

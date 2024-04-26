@@ -7,17 +7,20 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 
-public class TestLobby : MonoBehaviour {
+public class TestLobby : MonoBehaviour
+{
     private Lobby _hostLobby;
 
     private float heartbeatTimerMax = 15;
     private float heartbeatTimer;
 
     // Start is called before the first frame update
-    async void Start() {
+    private async void Start()
+    {
         await UnityServices.InitializeAsync();
 
-        AuthenticationService.Instance.SignedIn += () => {
+        AuthenticationService.Instance.SignedIn += () =>
+        {
             Debug.Log("Signed in" + AuthenticationService.Instance.PlayerId);
         };
 
@@ -29,12 +32,15 @@ public class TestLobby : MonoBehaviour {
         //DebugLogConsole.AddCommand<string>("lobby.join_code", "Join lobby by code", JoinLobbyByCode);
     }
 
-    private void Update() {
+    private void Update()
+    {
         HandleLobbyHeartbeat();
     }
 
-    async void CreateLobby() {
-        try {
+    private async void CreateLobby()
+    {
+        try
+        {
             string lobbyName = "TestLobby";
             int maxPlayers = 4;
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers);
@@ -42,51 +48,64 @@ public class TestLobby : MonoBehaviour {
             Debug.Log("Lobby created: " + lobby.Name + " " + lobby.Id + " " + lobby.LobbyCode);
             PrintPlayers(_hostLobby);
         }
-        catch (LobbyServiceException e) {
+        catch (LobbyServiceException e)
+        {
             Debug.LogError("Failed to create lobby: " + e.Message);
         }
     }
 
-
-    async void ListLobbies() {
-        try {
+    private async void ListLobbies()
+    {
+        try
+        {
             QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
 
             Debug.Log("Lobbies found: " + queryResponse.Results.Count);
-            foreach (Lobby lobby in queryResponse.Results) {
+            foreach (Lobby lobby in queryResponse.Results)
+            {
                 Debug.Log(lobby.Name + " " + lobby.MaxPlayers);
             }
         }
-        catch (LobbyServiceException e) {
+        catch (LobbyServiceException e)
+        {
             Debug.Log(e);
         }
     }
 
-    private async void JoinLobbyFirst() {
-        try {
+    private async void JoinLobbyFirst()
+    {
+        try
+        {
             QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
 
             await Lobbies.Instance.JoinLobbyByIdAsync(queryResponse.Results[0].Id);
         }
-        catch (LobbyServiceException e) {
+        catch (LobbyServiceException e)
+        {
             Debug.Log(e);
         }
     }
 
-    private async void JoinLobbyByCode(string code) {
-        try {
+    private async void JoinLobbyByCode(string code)
+    {
+        try
+        {
             await Lobbies.Instance.JoinLobbyByCodeAsync(code);
             Debug.Log("Joined lobby with code " + code);
         }
-        catch (LobbyServiceException e) {
+        catch (LobbyServiceException e)
+        {
             Debug.Log(e);
         }
     }
 
-    private async void HandleLobbyHeartbeat() {
-        if (_hostLobby != null) {
+    private async void HandleLobbyHeartbeat()
+    {
+        if (_hostLobby != null)
+        {
             heartbeatTimer -= Time.deltaTime;
-            if (heartbeatTimer < 0f) {
+            if (heartbeatTimer < 0f)
+            {
                 heartbeatTimer = heartbeatTimerMax;
 
                 await LobbyService.Instance.SendHeartbeatPingAsync(_hostLobby.Id);
@@ -94,9 +113,11 @@ public class TestLobby : MonoBehaviour {
         }
     }
 
-    private void PrintPlayers(Lobby lobby) {
+    private void PrintPlayers(Lobby lobby)
+    {
         Debug.Log("Players in Lobby " + lobby.Name);
-        foreach (Unity.Services.Lobbies.Models.Player player in lobby.Players) {
+        foreach (Unity.Services.Lobbies.Models.Player player in lobby.Players)
+        {
             Debug.Log(player.Id);
         }
     }

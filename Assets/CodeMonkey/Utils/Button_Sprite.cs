@@ -90,7 +90,8 @@ namespace CodeMonkey.Utils {
             hoverBehaviour_Image.color = hoverBehaviour_Color_Exit;
             SetupHoverBehaviour();
         }
-        void OnMouseDown() {
+
+        private void OnMouseDown() {
             if (!clickThroughUI && IsPointerOverUI()) return; // Over UI!
 
             if (internalOnMouseDownFunc != null) internalOnMouseDownFunc();
@@ -101,10 +102,12 @@ namespace CodeMonkey.Utils {
         public void Manual_OnMouseExit() {
             OnMouseExit();
         }
-        void OnMouseUp() {
+
+        private void OnMouseUp() {
             if (MouseUpOnceFunc != null) MouseUpOnceFunc();
         }
-        void OnMouseEnter() {
+
+        private void OnMouseEnter() {
             if (!clickThroughUI && IsPointerOverUI()) return; // Over UI!
             
             if (internalOnMouseEnterFunc != null) internalOnMouseEnterFunc();
@@ -113,7 +116,8 @@ namespace CodeMonkey.Utils {
             if (MouseOverOnceFunc != null) MouseOverOnceFunc();
             if (MouseOverOnceTooltipFunc != null) MouseOverOnceTooltipFunc();
         }
-        void OnMouseExit() {
+
+        private void OnMouseExit() {
             if (internalOnMouseExitFunc != null) internalOnMouseExitFunc();
             if (hoverBehaviour_Move) transform.localPosition = posExit;
             if (hoverBehaviourFunc_Exit != null) hoverBehaviourFunc_Exit();
@@ -121,7 +125,7 @@ namespace CodeMonkey.Utils {
             if (MouseOutOnceTooltipFunc != null) MouseOutOnceTooltipFunc();
         }
 
-        void OnMouseOver() {
+        private void OnMouseOver() {
             if (!clickThroughUI && IsPointerOverUI()) return; // Over UI!
 
             if (Input.GetMouseButton(1)) {
@@ -137,7 +141,8 @@ namespace CodeMonkey.Utils {
                 if (MouseRightDownOnceFunc != null) MouseRightDownOnceFunc();
             }
         }
-        void Update() {
+
+        private void Update() {
             if (draggingMouseRight) {
                 if (MouseRightDragUpdateFunc != null) MouseRightDragUpdateFunc(mouseRightDragStart, GetWorldPositionFromUI());
             }
@@ -150,8 +155,7 @@ namespace CodeMonkey.Utils {
             }
         }
 
-
-        void Awake() {
+        private void Awake() {
             if (GetWorldCamera == null) SetGetWorldCamera(() => Camera.main); // Set default World Camera
             posExit = transform.localPosition;
             posEnter = transform.localPosition + (Vector3)hoverBehaviour_Move_Amount;

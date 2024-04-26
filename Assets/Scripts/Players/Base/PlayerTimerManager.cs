@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerTimerManager : NetworkBehaviour {
+public class PlayerTimerManager : NetworkBehaviour
+{
     internal float LastPressedJumpTime;
     internal float LastOnGroundTime;
 
     // Update is called once per frame
-    void Update() {
-        if (!IsOwner) {
+    private void Update()
+    {
+        if (!IsOwner)
+        {
             return;
         }
 
