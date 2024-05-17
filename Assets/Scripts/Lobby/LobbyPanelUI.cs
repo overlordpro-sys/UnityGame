@@ -48,7 +48,6 @@ public class LobbyPanelUI : MonoBehaviour {
 
     private void UpdateLobby(Lobby lobby) {
         ClearLobby();
-
         foreach (Player player in lobby.Players) {
             Transform playerSingleTransform = Instantiate(_playerEntryPrefab, _playerEntryContainer);
             playerSingleTransform.gameObject.SetActive(true);

@@ -10,11 +10,20 @@ public class UIManager : MonoBehaviour {
     public GameObject mainMenu;
     [Tooltip("The lobby screen")]
     public GameObject lobbyMenu;
+    [Tooltip("The Text Input Window")]
+    public GameObject inputWindow;
 
     private void Awake() {
         Instance = this;
-        mainMenu.SetActive(true);
+        AwakeAll();
         lobbyMenu.SetActive(false);
+        inputWindow.SetActive(false);
+    }
+
+    public void AwakeAll() {
+        mainMenu.SetActive(true);
+        lobbyMenu.SetActive(true);
+        inputWindow.SetActive(true);
     }
 
     public void SetLobbyMenu() {

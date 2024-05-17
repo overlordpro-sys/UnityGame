@@ -26,7 +26,7 @@ public class LobbyEntryUI : MonoBehaviour {
 
         _lobbyNameText.text = lobby.Name;
         _playersText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
-        _gameModeText.text = lobby.Data[LobbyManager.KEY_GAME_MODE].Value ?? String.Empty;
+        //_gameModeText.text = lobby.Data[LobbyManager.KEY_GAME_MODE].Value ?? String.Empty;
     }
 
 }

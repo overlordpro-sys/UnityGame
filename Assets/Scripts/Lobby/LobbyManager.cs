@@ -147,6 +147,7 @@ public class LobbyManager : MonoBehaviour {
         }
     }
 
+    // TODO: Convert into ServerRPC
     IEnumerator SingleLobbyRefreshCoroutine() {
         var delay = new WaitForSecondsRealtime(1.1f);
         while (joinedLobby != null) {
@@ -186,6 +187,7 @@ public class LobbyManager : MonoBehaviour {
 
                 Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, playerId, options);
                 joinedLobby = lobby;
+                Debug.Log("Updated player name to " + playerName);
 
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
             }
@@ -204,7 +206,7 @@ public class LobbyManager : MonoBehaviour {
                     {
                         KEY_PLAYER_CHARACTER, new PlayerDataObject(
                             visibility: PlayerDataObject.VisibilityOptions.Public,
-                            value: playerCharacter.ToString())
+                            value: playerCharacter.Name)
                     }
                 };
 
@@ -212,7 +214,7 @@ public class LobbyManager : MonoBehaviour {
 
                 Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, playerId, options);
                 joinedLobby = lobby;
-
+                Debug.Log("Updated player character to " + playerCharacter.Name);
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
             }
             catch (LobbyServiceException e) {
@@ -307,7 +309,7 @@ public class LobbyManager : MonoBehaviour {
     private Player GetPlayer() {
         return new Player(AuthenticationService.Instance.PlayerId, null, new Dictionary<string, PlayerDataObject> {
         { KEY_PLAYER_NAME, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, _playerName) },
-        { KEY_PLAYER_CHARACTER, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, PlayerCharacter.A.ToString()) }
+        { KEY_PLAYER_CHARACTER, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, PlayerCharacter.A.Name) }
     });
     }
 }

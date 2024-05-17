@@ -32,7 +32,7 @@ public class UI_InputWindow : MonoBehaviour {
 
         okBtn = transform.Find("okBtn").GetComponent<Button_UI>();
         cancelBtn = transform.Find("cancelBtn").GetComponent<Button_UI>();
-        titleText = transform.Find("titleText").GetComponent<TextMeshProUGUI>();
+        titleText = transform.Find("titleBackground").Find("titleText").GetComponent<TextMeshProUGUI>();
         inputField = transform.Find("inputField").GetComponent<TMP_InputField>();
 
         Hide();
@@ -80,7 +80,8 @@ public class UI_InputWindow : MonoBehaviour {
         if (validCharacters.IndexOf(addedChar) != -1) {
             // Valid
             return addedChar;
-        } else {
+        }
+        else {
             // Invalid
             return '\0';
         }
@@ -91,12 +92,13 @@ public class UI_InputWindow : MonoBehaviour {
     }
 
     public static void Show_Static(string titleString, int defaultInt, Action onCancel, Action<int> onOk) {
-        instance.Show(titleString, defaultInt.ToString(), "0123456789-", 20, onCancel, 
+        instance.Show(titleString, defaultInt.ToString(), "0123456789-", 20, onCancel,
             (string inputText) => {
                 // Try to Parse input string
                 if (int.TryParse(inputText, out int _i)) {
                     onOk(_i);
-                } else {
+                }
+                else {
                     onOk(defaultInt);
                 }
             }

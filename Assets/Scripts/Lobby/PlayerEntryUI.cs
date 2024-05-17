@@ -16,19 +16,19 @@ public class PlayerEntryUI : MonoBehaviour {
     [SerializeField] private Button renameButton;
     [SerializeField] private Button kickPlayerButton;
 
-    private int playerVariantIndex = 0;
+    private PlayerCharacter character;
 
     private Player player;
 
 
+    // Use switch instead because playerVariantIndex keeps getting reset on removal and re adding of players
     private void OnNextCharacterButton() {
-        playerVariantIndex = (playerVariantIndex + 1) % Enum.GetValues(typeof(PlayerCharacter)).Length;
-        LobbyManager.Instance.UpdatePlayerCharacter((PlayerCharacter)Enum.GetValues(typeof(PlayerCharacter)).GetValue(playerVariantIndex)); // Changes player character and invokes lobby update
+        LobbyManager.Instance.UpdatePlayerCharacter(PlayerCharacter.GetNextCharacter(character)); // Changes player character and invokes lobby update
+
     }
 
     private void OnPrevCharacterButton() {
-        playerVariantIndex = (playerVariantIndex - 1 + Enum.GetValues(typeof(PlayerCharacter)).Length) % Enum.GetValues(typeof(PlayerCharacter)).Length;
-        LobbyManager.Instance.UpdatePlayerCharacter((PlayerCharacter)Enum.GetValues(typeof(PlayerCharacter)).GetValue(playerVariantIndex));
+        LobbyManager.Instance.UpdatePlayerCharacter(PlayerCharacter.GetPreviousCharacter(character)); // Changes player character and invokes lobby update
     }
 
 
@@ -48,10 +48,13 @@ public class PlayerEntryUI : MonoBehaviour {
         }
         else {
             SetIsPlayerButtonsVisible(false);
+            SetKickPlayerButtonVisible(LobbyManager.Instance.IsLobbyHost());
         }
         this.player = player;
         playerNameText.text = player.Data[LobbyManager.KEY_PLAYER_NAME].Value;
-        playerVariantAnimator.runtimeAnimatorController = Resources.Load(player.Data[LobbyManager.KEY_PLAYER_CHARACTER].Value) as RuntimeAnimatorController;
+        character = PlayerCharacter.GetPlayerCharacter(player.Data[LobbyManager.KEY_PLAYER_CHARACTER].Value);
+        playerVariantAnimator.runtimeAnimatorController = Resources.Load(character.ResourcePath) as RuntimeAnimatorController;
+        Debug.Log("Update Player");
         playerVariantAnimator.Play("Base Layer.Run");
     }
 

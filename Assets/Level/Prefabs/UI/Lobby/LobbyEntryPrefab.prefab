@@ -435,9 +435,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fa238b0cbdc5240ab375ad9bb0e2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyNameText: {fileID: 4224986253976284966}
-  playersText: {fileID: 8835449966322535355}
-  gameModeText: {fileID: 277489568258518957}
+  _lobbyNameText: {fileID: 4224986253976284966}
+  _playersText: {fileID: 8835449966322535355}
+  _gameModeText: {fileID: 277489568258518957}
 --- !u!1 &6184447011101087421
 GameObject:
   m_ObjectHideFlags: 0
