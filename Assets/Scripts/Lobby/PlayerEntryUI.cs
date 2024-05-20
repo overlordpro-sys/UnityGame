@@ -31,6 +31,10 @@ public class PlayerEntryUI : MonoBehaviour {
         LobbyManager.Instance.UpdatePlayerCharacter(PlayerCharacter.GetPreviousCharacter(character)); // Changes player character and invokes lobby update
     }
 
+    private void OnKickPlayerButton() {
+        LobbyManager.Instance.KickPlayer(player.Id);
+    }
+
 
     public void UpdatePlayer(Player player) {
         if (player.Id == AuthenticationService.Instance.PlayerId) {
@@ -48,13 +52,15 @@ public class PlayerEntryUI : MonoBehaviour {
         }
         else {
             SetIsPlayerButtonsVisible(false);
-            SetKickPlayerButtonVisible(LobbyManager.Instance.IsLobbyHost());
+            if (LobbyManager.Instance.IsLobbyHost()) {
+                SetKickPlayerButtonVisible(true);
+                kickPlayerButton.onClick.AddListener(OnKickPlayerButton);
+            }
         }
         this.player = player;
         playerNameText.text = player.Data[LobbyManager.KEY_PLAYER_NAME].Value;
         character = PlayerCharacter.GetPlayerCharacter(player.Data[LobbyManager.KEY_PLAYER_CHARACTER].Value);
         playerVariantAnimator.runtimeAnimatorController = Resources.Load(character.ResourcePath) as RuntimeAnimatorController;
-        Debug.Log("Update Player");
         playerVariantAnimator.Play("Base Layer.Run");
     }
 

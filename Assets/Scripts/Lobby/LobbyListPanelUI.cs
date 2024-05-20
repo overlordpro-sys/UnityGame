@@ -8,8 +8,8 @@ public class LobbyListPanelUI : MonoBehaviour {
     public static LobbyListPanelUI Instance { get; private set; }
 
 
-    [SerializeField] private Transform _entryContainer;
-    [SerializeField] private Transform _entryPrefab;
+    [SerializeField] private Transform entryContainer;
+    [SerializeField] private Transform entryPrefab;
 
     private void Awake() {
         Instance = this;
@@ -41,12 +41,12 @@ public class LobbyListPanelUI : MonoBehaviour {
     }
 
     private void UpdateLobbyList(List<Lobby> lobbyList) {
-        foreach (Transform entry in _entryContainer) {
+        foreach (Transform entry in entryContainer) {
             Destroy(entry.gameObject);
         }
 
         foreach (Lobby lobby in lobbyList) {
-            Transform lobbySingleTransform = Instantiate(_entryPrefab, _entryContainer);
+            Transform lobbySingleTransform = Instantiate(entryPrefab, entryContainer);
             lobbySingleTransform.gameObject.SetActive(true);
             LobbyEntryUI lobbyListSingleUI = lobbySingleTransform.GetComponent<LobbyEntryUI>();
             lobbyListSingleUI.UpdateLobby(lobby);

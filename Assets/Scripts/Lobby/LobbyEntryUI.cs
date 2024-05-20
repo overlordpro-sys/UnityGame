@@ -7,26 +7,26 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LobbyEntryUI : MonoBehaviour {
-    [SerializeField] private TextMeshProUGUI _lobbyNameText;
-    [SerializeField] private TextMeshProUGUI _playersText;
-    [SerializeField] private TextMeshProUGUI _gameModeText;
+    [SerializeField] private TextMeshProUGUI lobbyNameText;
+    [SerializeField] private TextMeshProUGUI playersText;
+    [SerializeField] private TextMeshProUGUI gameModeText;
 
 
-    private Lobby _lobby;
+    private Lobby lobby;
 
 
     private void Awake() {
         GetComponent<Button>().onClick.AddListener(() => {
-            LobbyManager.Instance.JoinLobby(_lobby);
+            LobbyManager.Instance.JoinLobby(lobby);
         });
     }
 
     public void UpdateLobby(Lobby lobby) {
-        this._lobby = lobby;
+        this.lobby = lobby;
 
-        _lobbyNameText.text = lobby.Name;
-        _playersText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
-        //_gameModeText.text = lobby.Data[LobbyManager.KEY_GAME_MODE].Value ?? String.Empty;
+        lobbyNameText.text = lobby.Name;
+        playersText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
+        //gameModeText.text = lobby.Data[LobbyManager.KEY_GAME_MODE].Value ?? String.Empty;
     }
 
 }

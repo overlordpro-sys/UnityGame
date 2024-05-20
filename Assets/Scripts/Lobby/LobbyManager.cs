@@ -44,19 +44,6 @@ public class LobbyManager : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
-        DontDestroyOnLoad(gameObject);
-        DebugLogConsole.AddCommand("player.authenticate", "Authenticate player", Authenticate);
-        DebugLogConsole.AddCommand<string, int, bool>("lobby.create", "Create a lobby", CreateLobby, "name", "players", "private");
-        DebugLogConsole.AddCommand("lobby.player_list", "List players in lobby", () => {
-            if (joinedLobby != null) {
-                foreach (Player player in joinedLobby.Players) {
-                    Debug.Log(player.Data[KEY_PLAYER_NAME].Value);
-                }
-            }
-        });
-        //DebugLogConsole.AddCommand("lobby.list", "List lobbies", ListLobbies);
-        //DebugLogConsole.AddCommand("lobby.join_first", "Join first lobby", JoinLobbyFirst);
-        //DebugLogConsole.AddCommand<string>("lobby.join_code", "Join lobby by code", JoinLobbyByCode);
     }
 
     private void Start() {
@@ -187,8 +174,6 @@ public class LobbyManager : MonoBehaviour {
 
                 Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, playerId, options);
                 joinedLobby = lobby;
-                Debug.Log("Updated player name to " + playerName);
-
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
             }
             catch (LobbyServiceException e) {

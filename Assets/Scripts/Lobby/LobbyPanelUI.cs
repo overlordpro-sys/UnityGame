@@ -10,13 +10,14 @@ public class LobbyPanelUI : MonoBehaviour {
     public static LobbyPanelUI Instance { get; private set; }
 
 
-    [SerializeField] private Transform _playerEntryContainer;
-    [SerializeField] private Transform _playerEntryPrefab;
+    [SerializeField] private Transform playerEntryContainer;
+    [SerializeField] private Transform playerEntryPrefab;
 
-    [SerializeField] private TextMeshProUGUI _lobbyNameText;
-    [SerializeField] private TextMeshProUGUI _playerCountText;
+    [SerializeField] private TextMeshProUGUI lobbyNameText;
+    [SerializeField] private TextMeshProUGUI playerCountText;
 
-    [SerializeField] private Button _startButton;
+    [SerializeField] private Button startButton;
+    [SerializeField] private Button leaveButton;
     private void Awake() {
         Instance = this;
         this.Show();
@@ -41,15 +42,17 @@ public class LobbyPanelUI : MonoBehaviour {
         UpdateLobby();
     }
 
+
     private void UpdateLobby() {
-        _startButton.gameObject.SetActive(LobbyManager.Instance.IsLobbyHost());
+        startButton.gameObject.SetActive(LobbyManager.Instance.IsLobbyHost());
+        leaveButton.onClick.AddListener(() => { LobbyManager.Instance.LeaveLobby(); });
         UpdateLobby(LobbyManager.Instance.GetJoinedLobby());
     }
 
     private void UpdateLobby(Lobby lobby) {
         ClearLobby();
         foreach (Player player in lobby.Players) {
-            Transform playerSingleTransform = Instantiate(_playerEntryPrefab, _playerEntryContainer);
+            Transform playerSingleTransform = Instantiate(playerEntryPrefab, playerEntryContainer);
             playerSingleTransform.gameObject.SetActive(true);
             PlayerEntryUI lobbyPlayerSingleUI = playerSingleTransform.GetComponent<PlayerEntryUI>();
 
@@ -63,14 +66,14 @@ public class LobbyPanelUI : MonoBehaviour {
 
         //changeGameModeButton.gameObject.SetActive(LobbyManager.Instance.IsLobbyHost());
 
-        _lobbyNameText.text = lobby.Name;
-        _playerCountText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
+        lobbyNameText.text = lobby.Name;
+        playerCountText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
         //gameModeText.text = lobby.Data[LobbyManager.KEY_GAME_MODE].Value;
 
         Show();
     }
     private void ClearLobby() {
-        foreach (Transform child in _playerEntryContainer) {
+        foreach (Transform child in playerEntryContainer) {
             Destroy(child.gameObject);
         }
     }
