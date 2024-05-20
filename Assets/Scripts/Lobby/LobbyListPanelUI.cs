@@ -66,5 +66,6 @@ public class LobbyListPanelUI : MonoBehaviour {
 
     public void Show() {
         gameObject.SetActive(true);
+        LobbyManager.Instance.RefreshLobbyList();
     }
 }

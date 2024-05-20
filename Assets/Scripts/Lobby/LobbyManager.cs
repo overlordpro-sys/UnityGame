@@ -136,7 +136,7 @@ public class LobbyManager : MonoBehaviour {
 
     // TODO: Convert into ServerRPC
     IEnumerator SingleLobbyRefreshCoroutine() {
-        var delay = new WaitForSecondsRealtime(1.1f);
+        var delay = new WaitForSecondsRealtime(0.9f);
         while (joinedLobby != null) {
             var task = Task.Run(async () => await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id));
             yield return new WaitUntil(() => task.IsCompleted);

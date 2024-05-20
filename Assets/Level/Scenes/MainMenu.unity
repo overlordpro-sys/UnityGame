@@ -915,8 +915,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa36df738f897eb4ca548fd7592f9fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entryContainer: {fileID: 1331554853}
-  _entryPrefab: {fileID: 735984326002762174, guid: d9142866409f891429745f7cb978d509, type: 3}
+  entryContainer: {fileID: 1331554853}
+  entryPrefab: {fileID: 735984326002762174, guid: d9142866409f891429745f7cb978d509, type: 3}
 --- !u!1 &217979930
 GameObject:
   m_ObjectHideFlags: 0
@@ -4708,12 +4708,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af75c5c49287b5741bc5ce8ed4942236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerEntryContainer: {fileID: 344952457}
-  _playerEntryPrefab: {fileID: 193535570388167571, guid: 2d53ca6697670aa4c9c00cf1cd2cf8b9, type: 3}
-  _lobbyNameText: {fileID: 178497101}
-  _playerCountText: {fileID: 2095243661}
-  _startButton: {fileID: 531452811}
-  _leaveButton: {fileID: 1511579295}
+  playerEntryContainer: {fileID: 344952457}
+  playerEntryPrefab: {fileID: 193535570388167571, guid: 2d53ca6697670aa4c9c00cf1cd2cf8b9, type: 3}
+  lobbyNameText: {fileID: 178497101}
+  playerCountText: {fileID: 2095243661}
+  startButton: {fileID: 531452811}
+  leaveButton: {fileID: 1511579295}
 --- !u!1 &2017959569
 GameObject:
   m_ObjectHideFlags: 0
