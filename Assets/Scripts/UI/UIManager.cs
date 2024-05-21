@@ -9,31 +9,31 @@ public class UIManager : MonoBehaviour {
     [Tooltip("The main menu screen")]
     public GameObject mainMenu;
     [Tooltip("The lobby screen")]
-    public GameObject lobbyMenu;
+    public GameObject createGameMenu;
     [Tooltip("The Text Input Window")]
     public GameObject inputWindow;
 
     private void Awake() {
         Instance = this;
         AwakeAll();
-        lobbyMenu.SetActive(false);
+        createGameMenu.SetActive(false);
         inputWindow.SetActive(false);
     }
 
     public void AwakeAll() {
         mainMenu.SetActive(true);
-        lobbyMenu.SetActive(true);
+        createGameMenu.SetActive(true);
         inputWindow.SetActive(true);
     }
 
-    public void SetLobbyMenu() {
+    public void SetCreateGameMenu() {
         mainMenu.SetActive(false);
-        lobbyMenu.SetActive(true);
+        createGameMenu.SetActive(true);
     }
 
     public void SetMainMenu() {
         mainMenu.SetActive(true);
-        lobbyMenu.SetActive(false);
+        createGameMenu.SetActive(false);
     }
 
     // Update is called once per frame
