@@ -6,10 +6,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerInstance : MonoBehaviour {
-    [SerializeField] private Animator playerVariantAnimator;
     [SerializeField] private TextMeshProUGUI playerNameText;
-    [SerializeField] private Button prevCharacterButton;
-    [SerializeField] private Button nextCharacterButton;
+    [SerializeField] private Button prevColorButton;
+    [SerializeField] private Button nextColorButton;
     [SerializeField] private Button renameButton;
 
     private PlayerConfig playerConfig;
@@ -17,7 +16,8 @@ public class PlayerInstance : MonoBehaviour {
 
     // Use switch instead because playerVariantIndex keeps getting reset on removal and re adding of players
     private void OnNextCharacterButton() {
-        playerConfig.PlayerCharacter = PlayerCharacter.GetNextCharacter(this.playerConfig.PlayerCharacter); // Changes player character and invokes lobby update
+        Color color = playerConfig.PlayerColor;
+        playerConfig.PlayerColor = GameSettings.PlayerColors.FindIndex()
         UpdatePlayerGUI(this.playerConfig);
 
     }
@@ -40,8 +40,8 @@ public class PlayerInstance : MonoBehaviour {
 
     public void InitPlayer(PlayerConfig player) {
         this.playerConfig = player;
-        prevCharacterButton.onClick.AddListener(OnPrevCharacterButton);
-        nextCharacterButton.onClick.AddListener(OnNextCharacterButton);
+        prevColorButton.onClick.AddListener(OnPrevCharacterButton);
+        nextColorButton.onClick.AddListener(OnNextCharacterButton);
         renameButton.onClick.AddListener(OnRenameButton);
         UpdatePlayerGUI(player);
     }

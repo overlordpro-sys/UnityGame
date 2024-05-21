@@ -6,11 +6,11 @@ namespace Assets.Scripts.GameState.Classes {
     [System.Serializable]
     public class PlayerConfig {
         public string PlayerName;
-        public PlayerCharacter PlayerCharacter;
+        public Color PlayerColor;
 
-        public PlayerConfig(string playerName, PlayerCharacter playerCharacter) {
+        public PlayerConfig(string playerName, Color color) {
             PlayerName = playerName;
-            PlayerCharacter = playerCharacter;
+            PlayerColor = color;
         }
     }
 }
