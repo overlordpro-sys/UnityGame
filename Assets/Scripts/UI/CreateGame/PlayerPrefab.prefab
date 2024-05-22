@@ -978,10 +978,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43bbf9bc88d3dc34bbb78907556cc85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerVariantAnimator: {fileID: 0}
   playerNameText: {fileID: 3299548610613244937}
-  prevCharacterButton: {fileID: 954987331282496229}
-  nextCharacterButton: {fileID: 6550824635875053599}
+  playerColor: {fileID: 8502975293482300680}
+  prevColorButton: {fileID: 954987331282496229}
+  nextColorButton: {fileID: 6550824635875053599}
   renameButton: {fileID: 562992858384937866}
 --- !u!1 &5226477354267792277
 GameObject:

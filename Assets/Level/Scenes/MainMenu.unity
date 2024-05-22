@@ -205,7 +205,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5125602933823873212, guid: 88935384805eaca43a8db30d25813767, type: 3}
+  m_Sprite: {fileID: 6005631364541511319, guid: 88935384805eaca43a8db30d25813767, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -311,9 +311,13 @@ MonoBehaviour:
     PlayerNum: 2
     PlayerConfigs:
     - PlayerName: Player 1
+      PlayerColor: {r: 1, g: 0, b: 0, a: 1}
     - PlayerName: Player 2
+      PlayerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
     - PlayerName: Player 3
+      PlayerColor: {r: 0, g: 1, b: 0, a: 1}
     - PlayerName: Player 4
+      PlayerColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &95910112
 GameObject:
   m_ObjectHideFlags: 0

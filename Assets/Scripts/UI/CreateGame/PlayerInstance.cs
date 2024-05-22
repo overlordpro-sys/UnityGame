@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerInstance : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI playerNameText;
+    [SerializeField] private Image playerColor;
     [SerializeField] private Button prevColorButton;
     [SerializeField] private Button nextColorButton;
     [SerializeField] private Button renameButton;
@@ -15,15 +16,14 @@ public class PlayerInstance : MonoBehaviour {
 
 
     // Use switch instead because playerVariantIndex keeps getting reset on removal and re adding of players
-    private void OnNextCharacterButton() {
-        Color color = playerConfig.PlayerColor;
-        playerConfig.PlayerColor = GameSettings.PlayerColors.FindIndex()
+    private void OnNextColorButton() {
+        playerConfig.PlayerColor = GameSettings.GetNextColor(playerConfig.PlayerColor);
         UpdatePlayerGUI(this.playerConfig);
 
     }
 
-    private void OnPrevCharacterButton() {
-        playerConfig.PlayerCharacter = PlayerCharacter.GetPreviousCharacter(this.playerConfig.PlayerCharacter); // Changes player character and invokes lobby update
+    private void OnPrevColorButton() {
+        playerConfig.PlayerColor = GameSettings.GetPreviousColor(playerConfig.PlayerColor);
         UpdatePlayerGUI(this.playerConfig);
     }
 
@@ -40,17 +40,15 @@ public class PlayerInstance : MonoBehaviour {
 
     public void InitPlayer(PlayerConfig player) {
         this.playerConfig = player;
-        prevColorButton.onClick.AddListener(OnPrevCharacterButton);
-        nextColorButton.onClick.AddListener(OnNextCharacterButton);
+        prevColorButton.onClick.AddListener(OnPrevColorButton);
+        nextColorButton.onClick.AddListener(OnNextColorButton);
         renameButton.onClick.AddListener(OnRenameButton);
         UpdatePlayerGUI(player);
     }
 
     public void UpdatePlayerGUI(PlayerConfig player) {
         playerNameText.text = playerConfig.PlayerName;
-        playerVariantAnimator.runtimeAnimatorController =
-    Resources.Load(player.PlayerCharacter.ResourcePath) as RuntimeAnimatorController;
-        playerVariantAnimator.Play("Base Layer.Run");
+        playerColor.color = player.PlayerColor;
 
     }
 }

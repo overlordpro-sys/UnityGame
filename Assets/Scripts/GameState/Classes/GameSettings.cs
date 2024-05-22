@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.GameState.Classes {
@@ -21,6 +22,14 @@ namespace Assets.Scripts.GameState.Classes {
 
         public void SetNumPlayers(int numPlayers) {
             PlayerNum = numPlayers;
+        }
+
+        public static Color GetNextColor(Color color) {
+            return PlayerColors.SkipWhile(x => x != color).Skip(1).DefaultIfEmpty(PlayerColors.First()).FirstOrDefault();
+        }
+
+        public static Color GetPreviousColor(Color color) {
+            return PlayerColors.TakeWhile(x => x != color).DefaultIfEmpty(PlayerColors.Last()).LastOrDefault();
         }
     }
 }
