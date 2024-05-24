@@ -29,7 +29,7 @@ public class PlayerInstance : MonoBehaviour {
 
     private void OnRenameButton() {
         UI_InputWindow.Show_Static("Player Name", this.playerConfig.PlayerName,
-        "abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXYWZ .,-", 20,
+        "abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXYWZ .,-1234567890", 12,
         () => {
             // Cancel
         }, (string playerName) => {
