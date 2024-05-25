@@ -4,10 +4,10 @@ using Assets.Scripts.GameState.Classes;
 using Assets.Scripts.Players;
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
+public class Player : MonoBehaviour {
     // Game Object
-    
+    private GameObject PlayerBody;
+
     // Scripts
     internal PlayerHealth PlayerHealth;
     internal PlayerMovement PlayerMovement;
