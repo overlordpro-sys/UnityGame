@@ -15,8 +15,8 @@ namespace Assets.Scripts.Players {
         private Vector2 inputVector;
         private bool movePressed = false;
 
-        public float thrustPower = 50f;
-        public float rotationPower = 2f;
+        public float ThrustPower = 50f;
+        public float RotationPower = 2f;
         void Start() {
             rigidbody = GetComponent<Rigidbody2D>();
             inputVector = Vector2.zero;
@@ -31,13 +31,13 @@ namespace Assets.Scripts.Players {
         private void ApplyThrust() {
             float thrustMult = Vector2.Dot(transform.right, inputVector);
             if (thrustMult > 0) {
-                rigidbody.AddForce(transform.right * thrustMult * thrustPower);
+                rigidbody.AddForce(transform.right * thrustMult * ThrustPower);
             }
         }
 
         private void ApplyRotation() {
             float targetAngle = Mathf.Atan2(inputVector.y, inputVector.x) * Mathf.Rad2Deg;
-            rigidbody.rotation = Mathf.LerpAngle(rigidbody.rotation, targetAngle, rotationPower * Time.fixedDeltaTime);
+            rigidbody.rotation = Mathf.LerpAngle(rigidbody.rotation, targetAngle, RotationPower * Time.fixedDeltaTime);
         }
 
         private void MoveReleased(InputAction.CallbackContext ctx) {

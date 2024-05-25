@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour, IDamageable {
     public event EventHandler OnHealthChanged;
@@ -9,8 +11,20 @@ public class PlayerHealth : MonoBehaviour, IDamageable {
     [SerializeField] public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
 
+    [SerializeField] private Image healthBar;
+
+    // Start is called before the first frame update
+    void Start() {
+        ResetHealth();
+        OnHealthChanged += OnOnHealthChanged;
+    }
+
+    private void OnOnHealthChanged(object sender, EventArgs e) {
+        UpdateHealthBar();
+    }
+
     public void TakeDamage(float damageAmount) {
-        CurrentHealth-=damageAmount;
+        CurrentHealth -= damageAmount;
         if (CurrentHealth <= 0) {
             CurrentHealth = 0;
             Die();
@@ -26,9 +40,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable {
         Destroy(gameObject);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        ResetHealth();
+    public void UpdateHealthBar() {
+        healthBar.fillAmount = GetPercentHealth();
+    }
+
+    public float GetPercentHealth() {
+        return CurrentHealth / MaxHealth;
     }
 }

@@ -64,6 +64,15 @@ namespace Assets.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Boost"",
+                    ""type"": ""Button"",
+                    ""id"": ""b839eb4f-f759-484e-9366-60b793f98004"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -198,6 +207,28 @@ namespace Assets.InputSystem
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af49cd2c-edba-4263-8bf7-1c1248d2104d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Boost"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0db6a65-410d-427b-8ef0-34f2aca5eea2"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Boost"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -238,6 +269,7 @@ namespace Assets.InputSystem
             m_Player_Mine = m_Player.FindAction("Mine", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+            m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -303,6 +335,7 @@ namespace Assets.InputSystem
         private readonly InputAction m_Player_Mine;
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Aim;
+        private readonly InputAction m_Player_Boost;
         public struct PlayerActions
         {
             private @PlayerControls m_Wrapper;
@@ -311,6 +344,7 @@ namespace Assets.InputSystem
             public InputAction @Mine => m_Wrapper.m_Player_Mine;
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Aim => m_Wrapper.m_Player_Aim;
+            public InputAction @Boost => m_Wrapper.m_Player_Boost;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -332,6 +366,9 @@ namespace Assets.InputSystem
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @Boost.started += instance.OnBoost;
+                @Boost.performed += instance.OnBoost;
+                @Boost.canceled += instance.OnBoost;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -348,6 +385,9 @@ namespace Assets.InputSystem
                 @Aim.started -= instance.OnAim;
                 @Aim.performed -= instance.OnAim;
                 @Aim.canceled -= instance.OnAim;
+                @Boost.started -= instance.OnBoost;
+                @Boost.performed -= instance.OnBoost;
+                @Boost.canceled -= instance.OnBoost;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -389,6 +429,7 @@ namespace Assets.InputSystem
             void OnMine(InputAction.CallbackContext context);
             void OnMove(InputAction.CallbackContext context);
             void OnAim(InputAction.CallbackContext context);
+            void OnBoost(InputAction.CallbackContext context);
         }
     }
 }
