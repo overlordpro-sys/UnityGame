@@ -11,6 +11,8 @@ public class Player : MonoBehaviour {
     // Scripts
     internal PlayerHealth PlayerHealth;
     internal PlayerMovement PlayerMovement;
+    internal PlayerBoost PlayerBoost;
+    internal PlayerTurret PlayerTurret;
 
     internal PlayerConfig PlayerConfig;
 
@@ -19,5 +21,7 @@ public class Player : MonoBehaviour {
 
         PlayerHealth = GetComponent<PlayerHealth>();
         PlayerMovement = GetComponent<PlayerMovement>();
+        PlayerBoost = GetComponent<PlayerBoost>();
+        PlayerTurret = GetComponent<PlayerTurret>();
     }
 }

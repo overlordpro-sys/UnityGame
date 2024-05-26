@@ -8,10 +8,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Entities
   - Water
   - UI
-  - Ground
+  - 
   - 
   - 
   - 
@@ -43,9 +43,6 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2373922499
-    locked: 0
-  - name: Ground
-    uniqueID: 550954275
     locked: 0
   - name: Entity
     uniqueID: 120357241

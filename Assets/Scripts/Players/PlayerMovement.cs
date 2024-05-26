@@ -11,45 +11,39 @@ namespace Assets.Scripts.Players {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour {
         private new Rigidbody2D rigidbody;
+
         private PlayerControls playerInputActions;
-        private Vector2 inputVector;
+        private Vector2 moveInputVector;
         private bool movePressed = false;
 
-        public float ThrustPower = 50f;
-        public float RotationPower = 2f;
+        [SerializeField] private float thrustPower = 50f;
+        [SerializeField] private float rotationPower = 2f;
+
         void Start() {
             rigidbody = GetComponent<Rigidbody2D>();
-            inputVector = Vector2.zero;
+            moveInputVector = Vector2.zero;
 
             playerInputActions = new PlayerControls();
-            playerInputActions.Player.Move.performed += MovePressed;
-            playerInputActions.Player.Move.canceled += MoveReleased;
+            playerInputActions.Player.Move.performed += (context => movePressed = true);
+            playerInputActions.Player.Move.canceled += (context => movePressed = false);
             playerInputActions.Enable();
 
         }
 
         private void ApplyThrust() {
-            float thrustMult = Vector2.Dot(transform.right, inputVector);
+            float thrustMult = Vector2.Dot(transform.right, moveInputVector);
             if (thrustMult > 0) {
-                rigidbody.AddForce(transform.right * thrustMult * ThrustPower);
+                rigidbody.AddForce(transform.right * thrustMult * thrustPower);
             }
         }
 
         private void ApplyRotation() {
-            float targetAngle = Mathf.Atan2(inputVector.y, inputVector.x) * Mathf.Rad2Deg;
-            rigidbody.rotation = Mathf.LerpAngle(rigidbody.rotation, targetAngle, RotationPower * Time.fixedDeltaTime);
-        }
-
-        private void MoveReleased(InputAction.CallbackContext ctx) {
-            movePressed = false;
-        }
-
-        private void MovePressed(InputAction.CallbackContext ctx) {
-            movePressed = true;
+            float targetAngle = Mathf.Atan2(moveInputVector.y, moveInputVector.x) * Mathf.Rad2Deg;
+            rigidbody.rotation = Mathf.LerpAngle(rigidbody.rotation, targetAngle, rotationPower * Time.fixedDeltaTime);
         }
 
         private void Update() {
-            inputVector = playerInputActions.Player.Move.ReadValue<Vector2>().normalized;
+            moveInputVector = playerInputActions.Player.Move.ReadValue<Vector2>().normalized;
         }
 
         private void FixedUpdate() {
