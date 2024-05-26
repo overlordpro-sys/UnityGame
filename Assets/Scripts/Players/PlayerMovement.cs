@@ -8,11 +8,9 @@ using Vector2 = UnityEngine.Vector2;
 using Quaternion = UnityEngine.Quaternion;
 
 namespace Assets.Scripts.Players {
-    [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour {
-        private new Rigidbody2D rigidbody;
+        [SerializeField] private Player player;
 
-        private PlayerControls playerInputActions;
         private Vector2 moveInputVector;
         private bool movePressed = false;
 
@@ -20,30 +18,30 @@ namespace Assets.Scripts.Players {
         [SerializeField] private float rotationPower = 2f;
 
         void Start() {
-            rigidbody = GetComponent<Rigidbody2D>();
+            if (player == null) {
+                Debug.LogError("Player missing reference", this);
+            }
+
             moveInputVector = Vector2.zero;
 
-            playerInputActions = new PlayerControls();
-            playerInputActions.Player.Move.performed += (context => movePressed = true);
-            playerInputActions.Player.Move.canceled += (context => movePressed = false);
-            playerInputActions.Enable();
-
+            player.PlayerInputActions.Player.Move.performed += (context => movePressed = true);
+            player.PlayerInputActions.Player.Move.canceled += (context => movePressed = false);
         }
 
         private void ApplyThrust() {
             float thrustMult = Vector2.Dot(transform.right, moveInputVector);
             if (thrustMult > 0) {
-                rigidbody.AddForce(transform.right * thrustMult * thrustPower);
+                player.Rigidbody.AddForce(transform.right * thrustMult * thrustPower);
             }
         }
 
         private void ApplyRotation() {
             float targetAngle = Mathf.Atan2(moveInputVector.y, moveInputVector.x) * Mathf.Rad2Deg;
-            rigidbody.rotation = Mathf.LerpAngle(rigidbody.rotation, targetAngle, rotationPower * Time.fixedDeltaTime);
+            player.Rigidbody.rotation = Mathf.LerpAngle(player.Rigidbody.rotation, targetAngle, rotationPower * Time.fixedDeltaTime);
         }
 
         private void Update() {
-            moveInputVector = playerInputActions.Player.Move.ReadValue<Vector2>().normalized;
+            moveInputVector = player.PlayerInputActions.Player.Move.ReadValue<Vector2>().normalized;
         }
 
         private void FixedUpdate() {

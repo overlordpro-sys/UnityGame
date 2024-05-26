@@ -9,8 +9,8 @@ using UnityEngine.UI;
 namespace Assets.Scripts.Players {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerBoost : MonoBehaviour {
-        private new Rigidbody2D rigidbody;
-        private PlayerControls playerInputActions;
+        [SerializeField] private Player player;
+
         private bool boostPressed = false;
         private float timeSinceBoostReleased = 0;
 
@@ -23,18 +23,15 @@ namespace Assets.Scripts.Players {
         public float BoostPower = 100f;
 
         void Start() {
-            rigidbody = GetComponent<Rigidbody2D>();
 
-            playerInputActions = new PlayerControls();
-            playerInputActions.Player.Boost.performed += BoostPressed;
-            playerInputActions.Player.Boost.canceled += BoostReleased;
-            playerInputActions.Enable();
+            player.PlayerInputActions.Player.Boost.performed += BoostPressed;
+            player.PlayerInputActions.Player.Boost.canceled += BoostReleased;
         }
 
 
         private void ApplyBoost() {
 
-            rigidbody.AddForce(transform.right * BoostPower);
+            player.Rigidbody.AddForce(transform.right * BoostPower);
 
         }
 

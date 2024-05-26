@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e675faec37c0741b8996b740af470c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 668919121}
   thrustPower: 50
   rotationPower: 2
 --- !u!114 &668919120
@@ -300,6 +301,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9e9dad2c82c984a8e54647585dd734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Body: {fileID: 163734380}
+  Turret: {fileID: 892266309}
+  Rigidbody: {fileID: 668919124}
+  Collider: {fileID: 668919123}
+  PlayerInput: {fileID: 668919122}
+  PlayerHealth: {fileID: 668919120}
+  PlayerMovement: {fileID: 668919119}
+  PlayerBoost: {fileID: 668919125}
+  PlayerTurret: {fileID: 668919126}
 --- !u!114 &668919122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7159ff315acfd41946a2a54e77601b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 668919121}
   boostBar: {fileID: 1742200858}
   BoostMaxCharge: 2
   BoostCharge: 2
@@ -444,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18add04ece6df744c8adbf4c718e14f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turret: {fileID: 892266309}
+  player: {fileID: 668919121}
   radPerSec: 3.1415927
 --- !u!1 &799849823
 GameObject:

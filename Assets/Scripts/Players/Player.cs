@@ -1,27 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.InputSystem;
 using Assets.Scripts.GameState.Classes;
 using Assets.Scripts.Players;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour {
-    // Game Object
-    private GameObject PlayerBody;
+namespace Assets.Scripts.Players {
+    public class Player : MonoBehaviour {
+        [Header("GameObjects")]
+        [SerializeField] internal GameObject Body;
+        [SerializeField] internal GameObject Turret;
 
-    // Scripts
-    internal PlayerHealth PlayerHealth;
-    internal PlayerMovement PlayerMovement;
-    internal PlayerBoost PlayerBoost;
-    internal PlayerTurret PlayerTurret;
+        [Header("Components")]
+        [SerializeField] internal Rigidbody2D Rigidbody;
+        [SerializeField] internal Collider2D Collider;
+        [SerializeField] internal PlayerInput PlayerInput;
+        internal PlayerControls PlayerInputActions;
 
-    internal PlayerConfig PlayerConfig;
+        [Header("Scripts")]
+        [SerializeField] internal PlayerHealth PlayerHealth;
+        [SerializeField] internal PlayerMovement PlayerMovement;
+        [SerializeField] internal PlayerBoost PlayerBoost;
+        [SerializeField] internal PlayerTurret PlayerTurret;
 
+        internal PlayerConfig PlayerConfig;
 
-    public void Awake() {
+        public void Start() {
+            if (PlayerHealth == null) {
+                Debug.LogError("PlayerHealth missing reference", this);
+            }
 
-        PlayerHealth = GetComponent<PlayerHealth>();
-        PlayerMovement = GetComponent<PlayerMovement>();
-        PlayerBoost = GetComponent<PlayerBoost>();
-        PlayerTurret = GetComponent<PlayerTurret>();
+            if (PlayerMovement == null) {
+                Debug.LogError("PlayerMovement missing reference", this);
+            }
+
+            if (PlayerBoost == null) {
+                Debug.LogError("PlayerBoost missing reference", this);
+            }
+
+            if (PlayerTurret == null) {
+                Debug.LogError("PlayerTurret missing reference", this);
+            }
+        }
+
+        public void Awake() {
+            PlayerInputActions = new PlayerControls();
+            PlayerInputActions.Enable();
+        }
     }
 }
