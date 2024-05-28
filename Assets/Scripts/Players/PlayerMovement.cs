@@ -8,7 +8,7 @@ using Vector2 = UnityEngine.Vector2;
 using Quaternion = UnityEngine.Quaternion;
 
 namespace Assets.Scripts.Players {
-    public class PlayerMovement : MonoBehaviour {
+    public class PlayerMovement : MonoBehaviour, IMoveable {
         [SerializeField] private Player player;
 
         private Vector2 moveInputVector;
@@ -51,5 +51,8 @@ namespace Assets.Scripts.Players {
             }
         }
 
+        public void TakeKnockback(float knockbackForce, Vector2 knockbackDirection) {
+            player.Rigidbody.AddForce(knockbackDirection * knockbackForce);
+        }
     }
 }

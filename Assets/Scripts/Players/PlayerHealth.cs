@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour, IDamageable {
     public event EventHandler OnHealthChanged;
 
-    [SerializeField] public float MaxHealth { get; set; }
+    [field: SerializeField] public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
 
     [SerializeField] private Image healthBar;

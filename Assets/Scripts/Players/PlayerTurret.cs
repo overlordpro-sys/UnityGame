@@ -18,6 +18,15 @@ public class PlayerTurret : MonoBehaviour {
 
     [SerializeField] private float degreesPerSec = 180;
 
+
+    [Header("Player Stats")]
+    [SerializeField] internal float BulletSizeMult = 1;
+    [SerializeField] internal float BulletSpeedMult = 1;
+    [SerializeField] internal float BulletAccelerationMult = 1;
+    [SerializeField] internal float BulletDamageMult = 1;
+    [SerializeField] internal float BulletKnockBackMult = 1;
+
+
     void Start() {
         turretAimVector = Vector2.zero;
 
