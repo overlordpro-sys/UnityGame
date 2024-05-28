@@ -16,7 +16,7 @@ public class PlayerTurret : MonoBehaviour {
     private bool mineHeld = false;
     private bool aimHeld = false;
 
-    [SerializeField] private float radPerSec = 180 * Mathf.Deg2Rad;
+    [SerializeField] private float degreesPerSec = 180;
 
     void Start() {
         turretAimVector = Vector2.zero;
@@ -32,14 +32,14 @@ public class PlayerTurret : MonoBehaviour {
     }
 
     private void Update() {
-        ProcessInput();
+        ProcessAimInput();
     }
 
     private void FixedUpdate() {
-
+        RotateTurret();
     }
 
-    private void ProcessInput() {
+    private void ProcessAimInput() {
         Vector2 input = player.PlayerInputActions.Player.Aim.ReadValue<Vector2>();
         if (player.PlayerInput.currentControlScheme.Equals("Keyboard&Mouse")) {
             // Assuming 'input' is the current mouse position in screen coordinates
@@ -55,11 +55,15 @@ public class PlayerTurret : MonoBehaviour {
             turretAimVector = input.normalized;
         }
 
+
+    }
+
+    private void RotateTurret() {
+
         // Calculate the angle to rotate the turret
         float angle = Mathf.Atan2(turretAimVector.y, turretAimVector.x) * Mathf.Rad2Deg;
-
+        angle = Mathf.MoveTowardsAngle(player.Turret.transform.rotation.eulerAngles.z, angle, degreesPerSec * Time.deltaTime);
         // Set the rotation of the turret
-        player.Turret.transform.rotation = Quaternion.Euler(0, 0, angle); // Adjust by -90 degrees if your turret's 'up' is its right
-
+        player.Turret.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
