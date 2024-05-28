@@ -8,23 +8,22 @@ using UnityEngine.UIElements;
 
 public class PlayerTurret : MonoBehaviour {
     [SerializeField] private Player player;
-
-    private Vector2 turretAimVector;
+    [SerializeField] private Transform firingPoint;
+    [SerializeField] private GameObject bulletPrefab;
 
     private bool usingKeyboard = true; // determines whether input vector should be processed as mouse cursor or stick input 
-    private bool shootHeld = false;
-    private bool mineHeld = false;
-    private bool aimHeld = false;
 
+    private Vector2 turretAimVector;
     [SerializeField] private float degreesPerSec = 180;
 
+    private bool shootHeld = false;
+    private float shootCooldown = 0;
+    [SerializeField] private float shootCooldownMax = 0.5f;
 
-    [Header("Player Stats")]
-    [SerializeField] internal float BulletSizeMult = 1;
-    [SerializeField] internal float BulletSpeedMult = 1;
-    [SerializeField] internal float BulletAccelerationMult = 1;
-    [SerializeField] internal float BulletDamageMult = 1;
-    [SerializeField] internal float BulletKnockBackMult = 1;
+    private bool mineHeld = false;
+
+
+    private List<IBulletModifier> bulletModifiers = new List<IBulletModifier>();
 
 
     void Start() {
@@ -35,19 +34,19 @@ public class PlayerTurret : MonoBehaviour {
 
         player.PlayerInputActions.Player.Mine.performed += (context => mineHeld = true);
         player.PlayerInputActions.Player.Mine.canceled += (context => mineHeld = false);
-
-        player.PlayerInputActions.Player.Aim.performed += (context => aimHeld = true);
-        player.PlayerInputActions.Player.Aim.canceled += (context => aimHeld = false);
     }
 
     private void Update() {
+        shootCooldown -= Time.deltaTime;
         ProcessAimInput();
     }
 
     private void FixedUpdate() {
         RotateTurret();
+        ProcessShooting();
     }
 
+    // Aiming
     private void ProcessAimInput() {
         Vector2 input = player.PlayerInputActions.Player.Aim.ReadValue<Vector2>();
         if (player.PlayerInput.currentControlScheme.Equals("Keyboard&Mouse")) {
@@ -74,5 +73,21 @@ public class PlayerTurret : MonoBehaviour {
         angle = Mathf.MoveTowardsAngle(player.Turret.transform.rotation.eulerAngles.z, angle, degreesPerSec * Time.deltaTime);
         // Set the rotation of the turret
         player.Turret.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    // Shooting
+    private void ProcessShooting() {
+        if (shootHeld && shootCooldown <= 0) {
+            Shoot();
+            shootCooldown = shootCooldownMax;
+        }
+    }
+
+    private void Shoot() {
+        GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, player.Turret.transform.rotation);
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.IgnoreOwnerCollision(player.Collider);
+        bulletScript.AddModifiers(bulletModifiers);
+        bulletScript.ApplyModifiers();
     }
 }

@@ -8,13 +8,14 @@ public class Bullet : MonoBehaviour {
     private Rigidbody2D rigidbody;
     private Collider2D collider;
     private Animator animator;
+    private GameObject owner;
 
-    [SerializeField] private float size;
-    [SerializeField] private float speed;
-    [SerializeField] private float accel;
-    [SerializeField] private float range;
-    [SerializeField] private float damage;
-    [SerializeField] private float knockBack;
+    [SerializeField] private float size = 1;
+    [SerializeField] private float speed = 10;
+    [SerializeField] private float accel = 0;
+    [SerializeField] private float range = 40;
+    [SerializeField] private float damage = 20;
+    [SerializeField] private float knockBack = 5;
 
     private List<IBulletModifier> modifiers = new List<IBulletModifier>();
 
@@ -32,17 +33,21 @@ public class Bullet : MonoBehaviour {
         ApplyModifiers();
     }
 
-    private void ApplyModifiers() {
+    public void ApplyModifiers() {
         foreach (var modifier in modifiers) {
             modifier.Apply(this);
         }
     }
 
-    private void AddModifiers(List<IBulletModifier> modifiers) {
+    public void IgnoreOwnerCollision(Collider2D owner) {
+        Physics2D.IgnoreCollision(collider, owner);
+    }
+
+    public void AddModifiers(List<IBulletModifier> modifiers) {
         this.modifiers.AddRange(modifiers);
     }
 
-    private void AddModifier(IBulletModifier modifier) {
+    public void AddModifier(IBulletModifier modifier) {
         this.modifiers.Add(modifier);
     }
 
