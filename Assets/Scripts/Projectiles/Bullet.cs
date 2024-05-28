@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
+    public RuntimeAnimatorController DefaultAnimatorController;
+    public RuntimeAnimatorController HitAnimatorController;
     private Rigidbody2D rigidbody;
     private Collider2D collider;
+    private Animator animator;
 
     [SerializeField] private float size;
     [SerializeField] private float speed;
@@ -22,7 +25,9 @@ public class Bullet : MonoBehaviour {
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
+        animator = GetComponentInChildren<Animator>();
         rigidbody.velocity = transform.right * speed;
+        animator.runtimeAnimatorController = DefaultAnimatorController;
         lastPosition = rigidbody.position;
         ApplyModifiers();
     }
@@ -53,20 +58,32 @@ public class Bullet : MonoBehaviour {
         lastPosition = rigidbody.position;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.TryGetComponent(out IDamageable damageable)) {
-            damageable.TakeDamage(damage);
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Player")) {
+            if (other.gameObject.TryGetComponent(out IDamageable damageable)) {
+                damageable.TakeDamage(damage);
+            }
+            if (other.gameObject.TryGetComponent(out IMoveable moveable)) {
+                moveable.TakeKnockback(knockBack, this.transform);
+            }
+            rigidbody.isKinematic = true;
+            rigidbody.velocity = Vector2.zero;
+            collider.enabled = false;
+            animator.runtimeAnimatorController = HitAnimatorController;
+            Destroy(gameObject, (float)0.333);
+        }
+        else if (other.gameObject.CompareTag("Border")) {
+            Destroy(gameObject);
         }
 
-        if (collision.gameObject.TryGetComponent(out IMoveable moveable)) {
-            moveable.TakeKnockback(knockBack, rigidbody.velocity.normalized);
-        }
-        Destroy(gameObject);
     }
-
 
     private void FixedUpdate() {
         HandleAcceleration();
         HandleRange();
+    }
+
+    private void OnDestroy() {
+        // Clean up & Animation
     }
 }

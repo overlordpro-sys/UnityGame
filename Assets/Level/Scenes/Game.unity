@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 668919126}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -844,7 +844,7 @@ Transform:
   m_GameObject: {fileID: 1145280085}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.01, y: -0.19, z: -0.19259013}
+  m_LocalPosition: {x: -29.37, y: -0.19, z: -0.19259013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -863,10 +863,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66e8b10ff7d8ca4585f000e24f8b664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DefaultAnimatorController: {fileID: 9100000, guid: 7973fabbe851d407a840c3abb60d748f, type: 2}
+  HitAnimatorController: {fileID: 9100000, guid: d018582dfd2c8486089c2af452aec4b3, type: 2}
   size: 1
   speed: 10
   accel: 0
-  range: 20
+  range: 40
   damage: 20
   knockBack: 10
 --- !u!70 &1145280088
@@ -1126,7 +1128,7 @@ GameObject:
   - component: {fileID: 1441839149}
   m_Layer: 0
   m_Name: Boundaries
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

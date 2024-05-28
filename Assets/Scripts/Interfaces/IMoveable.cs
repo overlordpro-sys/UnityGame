@@ -1,5 +1,5 @@
 using UnityEngine;
 
 public interface IMoveable {
-    void TakeKnockback(float knockbackForce, Vector2 knockbackDirection);
+    void TakeKnockback(float knockbackForce, Transform other);
 }

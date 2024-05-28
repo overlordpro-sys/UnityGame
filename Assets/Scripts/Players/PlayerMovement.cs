@@ -51,8 +51,8 @@ namespace Assets.Scripts.Players {
             }
         }
 
-        public void TakeKnockback(float knockbackForce, Vector2 knockbackDirection) {
-            player.Rigidbody.AddForce(knockbackDirection * knockbackForce);
+        public void TakeKnockback(float knockbackForce, Transform other) {
+            player.Rigidbody.AddForce(knockbackForce * (other.position - player.transform.position).normalized, ForceMode2D.Impulse);
         }
     }
 }
