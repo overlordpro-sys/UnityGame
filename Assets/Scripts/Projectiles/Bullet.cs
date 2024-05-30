@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
     public RuntimeAnimatorController DefaultAnimatorController;
     public RuntimeAnimatorController HitAnimatorController;
-    private Rigidbody2D rigidbody;
-    private Collider2D collider;
+    private Rigidbody2D rb;
+    new private Collider2D collider;
     private Animator animator;
-    private GameObject owner;
 
     [SerializeField] private float size = 1;
     [SerializeField] private float speed = 10;
@@ -24,71 +24,70 @@ public class Bullet : MonoBehaviour {
     private float totalDistance = 0;
 
     private void Awake() {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
         animator = GetComponentInChildren<Animator>();
-        rigidbody.velocity = transform.right * speed;
+        rb.velocity = transform.right * speed;
         animator.runtimeAnimatorController = DefaultAnimatorController;
-        lastPosition = rigidbody.position;
-        ApplyModifiers();
-    }
-
-    public void ApplyModifiers() {
-        foreach (var modifier in modifiers) {
-            modifier.Apply(this);
-        }
+        lastPosition = rb.position;
     }
 
     public void IgnoreOwnerCollision(Collider2D owner) {
         Physics2D.IgnoreCollision(collider, owner);
     }
 
+    // Bullet modifiers
     public void AddModifiers(List<IBulletModifier> modifiers) {
         this.modifiers.AddRange(modifiers);
+        ApplyModifiers();
+    }
+    public void ApplyModifiers() {
+        foreach (var modifier in modifiers) {
+            modifier.Apply(this);
+        }
     }
 
-    public void AddModifier(IBulletModifier modifier) {
-        this.modifiers.Add(modifier);
+    private void ApplyAcceleration() {
+        rb.velocity += (Vector2)transform.right * accel * Time.deltaTime;
     }
 
-    private void HandleAcceleration() {
-        rigidbody.velocity += (Vector2)transform.right * accel * Time.deltaTime;
-    }
-
-    private void HandleRange() {
+    private void CheckRange() {
         if (totalDistance > range) {
             Destroy(gameObject);
         }
-        totalDistance += Vector2.Distance(lastPosition, rigidbody.position);
-        lastPosition = rigidbody.position;
+        totalDistance += Vector2.Distance(lastPosition, rb.position);
+        lastPosition = rb.position;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            if (other.gameObject.TryGetComponent(out IDamageable damageable)) {
-                damageable.TakeDamage(damage);
-            }
-            if (other.gameObject.TryGetComponent(out IMoveable moveable)) {
-                moveable.TakeKnockback(knockBack, this.transform);
-            }
-            rigidbody.isKinematic = true;
-            rigidbody.velocity = Vector2.zero;
-            collider.enabled = false;
-            animator.runtimeAnimatorController = HitAnimatorController;
-            Destroy(gameObject, (float)0.333);
+            ProcessPlayerCollision(other);
         }
         else if (other.gameObject.CompareTag("Border")) {
             Destroy(gameObject);
         }
+    }
 
+    private void ProcessPlayerCollision(Collision2D other) {
+        if (other.gameObject.TryGetComponent(out IDamageable damageable)) {
+            damageable.TakeDamage(damage);
+        }
+        if (other.gameObject.TryGetComponent(out IMoveable moveable)) {
+            moveable.TakeKnockback(knockBack, this.transform);
+        }
+        PlayHitAnimation();
+        Destroy(gameObject, (float)0.333);
+    }
+
+    private void PlayHitAnimation() {
+        rb.isKinematic = true;
+        rb.velocity = Vector2.zero;
+        collider.enabled = false;
+        animator.runtimeAnimatorController = HitAnimatorController;
     }
 
     private void FixedUpdate() {
-        HandleAcceleration();
-        HandleRange();
-    }
-
-    private void OnDestroy() {
-        // Clean up & Animation
+        ApplyAcceleration();
+        CheckRange();
     }
 }

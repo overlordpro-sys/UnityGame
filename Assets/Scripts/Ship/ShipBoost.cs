@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Assets.InputSystem;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Players {
+namespace Assets.Scripts.Ship {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerBoost : MonoBehaviour {
-        [SerializeField] private Player player;
+    public class ShipBoost : MonoBehaviour {
+        [SerializeField] private Ship player;
 
         private bool boostPressed = false;
         private float timeSinceBoostReleased = 0;

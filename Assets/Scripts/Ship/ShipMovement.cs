@@ -1,15 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using Assets.InputSystem;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Vector2 = UnityEngine.Vector2;
-using Quaternion = UnityEngine.Quaternion;
 
-namespace Assets.Scripts.Players {
-    public class PlayerMovement : MonoBehaviour, IMoveable {
-        [SerializeField] private Player player;
+namespace Assets.Scripts.Ship {
+    public class ShipMovement : MonoBehaviour, IMoveable {
+        [SerializeField] private Ship player;
 
         private Vector2 moveInputVector;
         private bool movePressed = false;

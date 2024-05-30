@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using Assets.InputSystem;
 using Assets.Scripts.GameState.Classes;
-using Assets.Scripts.Players;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Assets.Scripts.Players {
-    public class Player : MonoBehaviour {
+namespace Assets.Scripts.Ship {
+    public class Ship : MonoBehaviour {
         [Header("GameObjects")]
         [SerializeField] internal GameObject Body;
         [SerializeField] internal GameObject Turret;
@@ -19,10 +16,10 @@ namespace Assets.Scripts.Players {
         internal PlayerControls PlayerInputActions;
 
         [Header("Scripts")]
-        [SerializeField] internal PlayerHealth PlayerHealth;
-        [SerializeField] internal PlayerMovement PlayerMovement;
-        [SerializeField] internal PlayerBoost PlayerBoost;
-        [SerializeField] internal PlayerTurret PlayerTurret;
+        [SerializeField] internal ShipHealth PlayerHealth;
+        [SerializeField] internal ShipMovement PlayerMovement;
+        [SerializeField] internal ShipBoost PlayerBoost;
+        [SerializeField] internal ShipTurret PlayerTurret;
 
         internal PlayerConfig PlayerConfig;
 
