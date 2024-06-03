@@ -53,7 +53,7 @@ public class PlayerInstance : MonoBehaviour {
         if (index == 0) {
             _playerData.PlayerInputDevices = new List<InputDevice>() { Keyboard.current, Mouse.current };
             _playerData.PlayerInput = PlayerData.PlayerInputType.KeyboardMouse;
-            Debug.Log("Keyboard+Mouse");
+            Debug.Log("KeyboardMouse");
         }
         else {
             _playerData.PlayerInputDevices = new List<InputDevice>() { Gamepad.all[index - 1] };
@@ -71,7 +71,7 @@ public class PlayerInstance : MonoBehaviour {
 
     private void UpdateDropdown() {
         playerShipDropdown.ClearOptions();
-        playerShipDropdown.options.Add(new TMP_Dropdown.OptionData("1. Keyboard+Mouse"));
+        playerShipDropdown.options.Add(new TMP_Dropdown.OptionData("1. KeyboardMouse"));
         for (int i = 0; i < Gamepad.all.Count; i++) {
             playerShipDropdown.options.Add(new TMP_Dropdown.OptionData((i + 2) + ". " + Gamepad.all[i].device.displayName));
         }

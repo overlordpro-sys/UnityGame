@@ -11,7 +11,7 @@ namespace Assets.Scripts.Game {
         public static GameManager Instance { get; private set; }
         public GameSettings GameSettings { get; set; }
         public PlayerData[] PlayersData { get; set; }
-        public GameObject PlayerPrefab;
+        public GameObject ShipPrefab;
 
         private Vector2[] spawnPoints = new Vector2[4];
 
@@ -50,15 +50,14 @@ namespace Assets.Scripts.Game {
             Debug.Log("Starting game with " + GameSettings.PlayerNum + " players");
             foreach (PlayerData player in PlayersData) {
                 Debug.Log("Player " + player.PlayerId + " has color " + player.PlayerColor);
-
-                StartCoroutine(StartGameCoroutine());
-
             }
+
+            StartCoroutine(StartGameCoroutine());
         }
 
         private IEnumerator StartGameCoroutine() {
             // Load your game scene asynchronously
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GameScene");
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level/Scenes/Game");
 
             // Wait until the scene fully loads
             while (!asyncLoad.isDone) {
@@ -72,7 +71,7 @@ namespace Assets.Scripts.Game {
             for (int i = 0; i < GameManager.Instance.GameSettings.PlayerNum; i++) {
                 PlayerData playerData = PlayersData[i];
                 // Instantiate player at the appropriate spawn point
-                GameObject player = Instantiate(PlayerPrefab, spawnPoints[i], Quaternion.identity);
+                GameObject player = Instantiate(ShipPrefab, spawnPoints[i], Quaternion.identity);
 
                 // Get the PlayerInput component and set the device
                 PlayerInput playerInput = player.GetComponent<PlayerInput>();

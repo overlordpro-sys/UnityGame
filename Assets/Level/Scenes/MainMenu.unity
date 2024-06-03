@@ -308,17 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392dafd2c0545ca44ba2c7fbd582aa71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameSettings:
-    PlayerNum: 2
-    PlayerConfigs:
-    - PlayerName: Player 1
-      PlayerColor: {r: 1, g: 0, b: 0, a: 1}
-    - PlayerName: Player 2
-      PlayerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    - PlayerName: Player 3
-      PlayerColor: {r: 0, g: 1, b: 0, a: 1}
-    - PlayerName: Player 4
-      PlayerColor: {r: 0, g: 0, b: 1, a: 1}
+  ShipPrefab: {fileID: 944335206124340502, guid: 81d83c7af52949542a7e70f5f102d9d4, type: 3}
 --- !u!114 &94575056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,7 +669,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 153737339866816633, guid: 42232d6305371574ba9379ddfa3b3f34, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 153737339866816633, guid: 42232d6305371574ba9379ddfa3b3f34, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -688,18 +678,18 @@ PrefabInstance:
     - target: {fileID: 153737339866816633, guid: 42232d6305371574ba9379ddfa3b3f34, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 95910114}
+      objectReference: {fileID: 94575055}
     - target: {fileID: 153737339866816633, guid: 42232d6305371574ba9379ddfa3b3f34, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 153737339866816633, guid: 42232d6305371574ba9379ddfa3b3f34, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetLobbyMenu
+      value: StartGame
       objectReference: {fileID: 0}
     - target: {fileID: 153737339866816633, guid: 42232d6305371574ba9379ddfa3b3f34, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManager, Assembly-CSharp
+      value: Assets.Scripts.Game.GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 153737339866816633, guid: 42232d6305371574ba9379ddfa3b3f34, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1500,6 +1490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerContainer: {fileID: 198883113}
   playerInstancePrefab: {fileID: 236617977368411100, guid: e93a7a582bf50ff44a799634e0708cb0, type: 3}
+  numPlayersText: {fileID: 375969645}
 --- !u!114 &1248841047
 MonoBehaviour:
   m_ObjectHideFlags: 0

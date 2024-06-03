@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Game;
 using Assets.Scripts.GameState.Classes;
+using TMPro;
 using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ namespace Assets.Scripts.UI {
     public class PanelCreateGame : MonoBehaviour {
         [SerializeField] private Transform playerContainer;
         [SerializeField] private Transform playerInstancePrefab;
+        [SerializeField] private TMP_Text numPlayersText;
 
         public void Start() {
             UpdateNumPlayers(GameManager.Instance.GameSettings.PlayerNum);
@@ -20,6 +22,7 @@ namespace Assets.Scripts.UI {
         }
 
         public void UpdateNumPlayers(int numPlayers) {
+            numPlayersText.text = numPlayers.ToString();
             GameSettings settings = GameManager.Instance.GameSettings;
             // Remove excess players
             ClearPlayers();

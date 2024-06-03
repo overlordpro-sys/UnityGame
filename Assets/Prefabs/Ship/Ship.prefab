@@ -184,7 +184,7 @@ MonoBehaviour:
     m_ActionId: b839eb4f-f759-484e-9366-60b793f98004
     m_ActionName: 'Player/Boost[/XInputControllerWindows/buttonSouth,/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultControlScheme: KeyboardMouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
