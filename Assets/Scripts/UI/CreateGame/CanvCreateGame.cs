@@ -16,9 +16,9 @@ namespace Assets.Scripts.UI {
         }
 
         public void UpdatePlayersFromSlider(Slider slider) {
-            UpdateNumPlayers((int) slider.value);
+            UpdateNumPlayers((int)slider.value);
         }
-        
+
         public void UpdateNumPlayers(int numPlayers) {
             GameSettings settings = GameManager.Instance.GameSettings;
             // Remove excess players
@@ -30,7 +30,7 @@ namespace Assets.Scripts.UI {
                 playerSingleTransform.gameObject.SetActive(true);
                 PlayerInstance lobbyPlayerSingleUI = playerSingleTransform.GetComponent<PlayerInstance>();
 
-                lobbyPlayerSingleUI.InitPlayer(settings.PlayerConfigs[i]);
+                lobbyPlayerSingleUI.InitPlayer(GameManager.Instance.PlayersData[i]);
             }
             settings.PlayerNum = numPlayers;
 

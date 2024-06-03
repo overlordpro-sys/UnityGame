@@ -21,7 +21,7 @@ namespace Assets.Scripts.Ship {
         [SerializeField] internal ShipBoost PlayerBoost;
         [SerializeField] internal ShipTurret PlayerTurret;
 
-        internal PlayerConfig PlayerConfig;
+        internal PlayerData PlayerData;
 
         public void Start() {
             if (PlayerHealth == null) {

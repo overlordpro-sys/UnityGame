@@ -15,10 +15,13 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Assets.InputSystem {
-    public partial class @PlayerControls : IInputActionCollection2, IDisposable {
+namespace Assets.InputSystem
+{
+    public partial class @PlayerControls: IInputActionCollection2, IDisposable
+    {
         public InputActionAsset asset { get; }
-        public @PlayerControls() {
+        public @PlayerControls()
+        {
             asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerControls"",
     ""maps"": [
@@ -79,7 +82,7 @@ namespace Assets.InputSystem {
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -101,7 +104,7 @@ namespace Assets.InputSystem {
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Mine"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -134,7 +137,7 @@ namespace Assets.InputSystem {
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -145,7 +148,7 @@ namespace Assets.InputSystem {
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -156,7 +159,7 @@ namespace Assets.InputSystem {
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -167,7 +170,7 @@ namespace Assets.InputSystem {
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -189,7 +192,7 @@ namespace Assets.InputSystem {
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -222,7 +225,7 @@ namespace Assets.InputSystem {
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Boost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -232,8 +235,8 @@ namespace Assets.InputSystem {
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Keyboard&Mouse"",
-            ""bindingGroup"": ""Keyboard&Mouse"",
+            ""name"": ""KeyboardMouse"",
+            ""bindingGroup"": ""KeyboardMouse"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
@@ -269,49 +272,59 @@ namespace Assets.InputSystem {
             m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             UnityEngine.Object.Destroy(asset);
         }
 
-        public InputBinding? bindingMask {
+        public InputBinding? bindingMask
+        {
             get => asset.bindingMask;
             set => asset.bindingMask = value;
         }
 
-        public ReadOnlyArray<InputDevice>? devices {
+        public ReadOnlyArray<InputDevice>? devices
+        {
             get => asset.devices;
             set => asset.devices = value;
         }
 
         public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
 
-        public bool Contains(InputAction action) {
+        public bool Contains(InputAction action)
+        {
             return asset.Contains(action);
         }
 
-        public IEnumerator<InputAction> GetEnumerator() {
+        public IEnumerator<InputAction> GetEnumerator()
+        {
             return asset.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator() {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return GetEnumerator();
         }
 
-        public void Enable() {
+        public void Enable()
+        {
             asset.Enable();
         }
 
-        public void Disable() {
+        public void Disable()
+        {
             asset.Disable();
         }
 
         public IEnumerable<InputBinding> bindings => asset.bindings;
 
-        public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false) {
+        public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
+        {
             return asset.FindAction(actionNameOrId, throwIfNotFound);
         }
 
-        public int FindBinding(InputBinding bindingMask, out InputAction action) {
+        public int FindBinding(InputBinding bindingMask, out InputAction action)
+        {
             return asset.FindBinding(bindingMask, out action);
         }
 
@@ -323,7 +336,8 @@ namespace Assets.InputSystem {
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Aim;
         private readonly InputAction m_Player_Boost;
-        public struct PlayerActions {
+        public struct PlayerActions
+        {
             private @PlayerControls m_Wrapper;
             public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
@@ -336,7 +350,8 @@ namespace Assets.InputSystem {
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
             public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
-            public void AddCallbacks(IPlayerActions instance) {
+            public void AddCallbacks(IPlayerActions instance)
+            {
                 if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
                 @Shoot.started += instance.OnShoot;
@@ -356,7 +371,8 @@ namespace Assets.InputSystem {
                 @Boost.canceled += instance.OnBoost;
             }
 
-            private void UnregisterCallbacks(IPlayerActions instance) {
+            private void UnregisterCallbacks(IPlayerActions instance)
+            {
                 @Shoot.started -= instance.OnShoot;
                 @Shoot.performed -= instance.OnShoot;
                 @Shoot.canceled -= instance.OnShoot;
@@ -374,12 +390,14 @@ namespace Assets.InputSystem {
                 @Boost.canceled -= instance.OnBoost;
             }
 
-            public void RemoveCallbacks(IPlayerActions instance) {
+            public void RemoveCallbacks(IPlayerActions instance)
+            {
                 if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IPlayerActions instance) {
+            public void SetCallbacks(IPlayerActions instance)
+            {
                 foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
                 m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
@@ -388,20 +406,25 @@ namespace Assets.InputSystem {
         }
         public PlayerActions @Player => new PlayerActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
-        public InputControlScheme KeyboardMouseScheme {
-            get {
-                if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse");
+        public InputControlScheme KeyboardMouseScheme
+        {
+            get
+            {
+                if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("KeyboardMouse");
                 return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
             }
         }
         private int m_GamepadSchemeIndex = -1;
-        public InputControlScheme GamepadScheme {
-            get {
+        public InputControlScheme GamepadScheme
+        {
+            get
+            {
                 if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
                 return asset.controlSchemes[m_GamepadSchemeIndex];
             }
         }
-        public interface IPlayerActions {
+        public interface IPlayerActions
+        {
             void OnShoot(InputAction.CallbackContext context);
             void OnMine(InputAction.CallbackContext context);
             void OnMove(InputAction.CallbackContext context);
