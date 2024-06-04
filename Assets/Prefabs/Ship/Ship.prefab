@@ -85,9 +85,9 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 4.1730824
-  m_LinearDrag: 1.25
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 1
   m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -136,7 +136,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2.5, y: 2.0192308}
+  m_Size: {x: 50, y: 40}
   m_Direction: 1
 --- !u!114 &3760081919127626792
 MonoBehaviour:
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5547644529286468026}
-  thrustPower: 30
+  thrustPower: 80
   rotationPower: 1.2
 --- !u!114 &7435159554686375107
 MonoBehaviour:
@@ -256,7 +256,7 @@ MonoBehaviour:
   BoostCharge: 2
   BoostRechargeRate: 0.5
   BoostRechargeDelay: 2
-  BoostPower: 50
+  BoostPower: 120
 --- !u!114 &6022754305777516767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,7 +301,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4241015803408593594}
@@ -392,10 +392,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2553215959059102114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.25}
-  m_SizeDelta: {x: 3.5, y: 0.25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -7}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6620078503693556686
 CanvasRenderer:
@@ -516,7 +516,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 2.5, y: 2.0192308}
+  m_Size: {x: 50, y: 40}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -569,7 +569,7 @@ Transform:
   m_GameObject: {fileID: 5271963961933313751}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.43, y: 0, z: 0}
+  m_LocalPosition: {x: 5.9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -607,10 +607,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2553215959059102114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.5}
-  m_SizeDelta: {x: 3.5, y: 0.25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -7}
+  m_SizeDelta: {x: 0, y: -7}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8053126442176339224
 CanvasRenderer:
@@ -682,10 +682,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2553215959059102114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.25}
-  m_SizeDelta: {x: 3.5, y: 0.25}
+  m_SizeDelta: {x: 0, y: -7}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8460759911482740031
 CanvasRenderer:
@@ -735,7 +735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 851385540713432687}
   - component: {fileID: 2890428711257565812}
-  - component: {fileID: 5265628900921696613}
+  - component: {fileID: 4898833153367202551}
   m_Layer: 6
   m_Name: StatCanvas
   m_TagString: Untagged
@@ -786,7 +786,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1818360609 &5265628900921696613
+--- !u!1818360609 &4898833153367202551
 RotationConstraint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -876,8 +876,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2}
-  m_SizeDelta: {x: 4, y: 1}
+  m_AnchoredPosition: {x: 0, y: 35}
+  m_SizeDelta: {x: 70, y: 14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1908144074191928111
 CanvasRenderer:

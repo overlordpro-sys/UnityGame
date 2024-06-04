@@ -36,8 +36,8 @@ namespace Assets.Scripts.Game {
             float screenWidth = Camera.main.orthographicSize * 2 * Camera.main.aspect;
             float screenHeight = Camera.main.orthographicSize * 2;
 
-            float xEdge = screenWidth / 2;
-            float yEdge = screenHeight / 2;
+            float xEdge = screenWidth / 2 - 100;
+            float yEdge = screenHeight / 2 - 100;
 
             // Top left, top right, bottom left, bottom right
             spawnPoints[0] = new Vector2(-xEdge, yEdge);

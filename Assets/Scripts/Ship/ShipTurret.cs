@@ -45,7 +45,7 @@ namespace Assets.Scripts.Ship {
         // Aiming
         private void ProcessAimInput() {
             Vector2 input = player.PlayerInputActions.Player.Aim.ReadValue<Vector2>();
-            if (player.PlayerInput.currentControlScheme.Equals("Keyboard&Mouse")) {
+            if (player.PlayerInput.currentControlScheme.Equals("KeyboardMouse")) {
                 // Assuming 'input' is the current mouse position in screen coordinates
                 Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
 
