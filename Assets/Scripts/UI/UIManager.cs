@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Game;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour {
@@ -34,6 +35,14 @@ public class UIManager : MonoBehaviour {
     public void SetMainMenu() {
         mainMenu.SetActive(true);
         createGameMenu.SetActive(false);
+    }
+
+    public void StartGame() {
+        GameManager.Instance.StartGame();
+    }
+
+    public void ExitGame() {
+        Application.Quit();
     }
 
     // Update is called once per frame

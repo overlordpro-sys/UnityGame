@@ -1,0 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BoundaryManager : MonoBehaviour {
+    private EdgeCollider2D collider;
+    // Start is called before the first frame update
+    void Start() {
+        collider =
+    }
+
+    // Update is called once per frame
+    void Update() {
+
+    }
+}

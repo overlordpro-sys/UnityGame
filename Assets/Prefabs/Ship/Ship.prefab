@@ -238,8 +238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 5547644529286468026}
-  thrustPower: 160
-  rotationPower: 1.2
+  thrustPower: 180
+  rotationPower: 2
 --- !u!114 &7435159554686375107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,9 +256,9 @@ MonoBehaviour:
   boostBar: {fileID: 3626869246828057684}
   BoostMaxCharge: 2
   BoostCharge: 2
-  BoostRechargeRate: 0.5
-  BoostRechargeDelay: 2
-  BoostPower: 200
+  BoostRechargeRate: 1
+  BoostRechargeDelay: 1
+  BoostPower: 240
 --- !u!114 &6022754305777516767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +275,7 @@ MonoBehaviour:
   firingPoint: {fileID: 3570331054020816849}
   bulletPrefab: {fileID: 7017477473386560194, guid: 3f7888c5711c40a42a2082a4a50ec753, type: 3}
   degreesPerSec: 180
-  shootCooldownMax: 0.5
+  shootCooldownMax: 0.8
 --- !u!1 &2168008271558321105
 GameObject:
   m_ObjectHideFlags: 0

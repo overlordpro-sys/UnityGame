@@ -88,6 +88,7 @@ namespace Assets.Scripts.Game {
                 yield return null;
             }
 
+            BoundaryManager.Instance.UpdateBoundaries();
             GameStart.Invoke(this, EventArgs.Empty);
         }
 
@@ -115,7 +116,7 @@ namespace Assets.Scripts.Game {
         }
 
         private void OnGameEnd(object sender, EventArgs e) {
-
+            UI_GameOver.Instance.SetUIActive();
         }
 
         private void OnRoundStart(object sender, EventArgs e) {
@@ -129,15 +130,26 @@ namespace Assets.Scripts.Game {
             }
             AlivePlayers.Clear();
 
+            GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+            foreach (GameObject bullet in bullets) {
+                Destroy(bullet);
+            }
+
             // Check if any players have 3 rounds won
+            bool gameEnd = false;
             foreach (PlayerData player in PlayersData) {
                 if (player.PlayerRoundsWon == 3) {
                     Debug.Log("Player " + player.PlayerId + " wins the game!");
                     // End the game
+                    gameEnd = true;
+                    UI_GameOver.Instance.UpdateTitle("Game Over: Player " + player.PlayerId + " Wins!");
                     GameEnd.Invoke(this, EventArgs.Empty);
                 }
             }
-            RoundStart.Invoke(this, EventArgs.Empty);
+
+            if (!gameEnd) {
+                RoundStart.Invoke(this, EventArgs.Empty);
+            }
         }
 
         private void UpdateAlivePlayers(PlayerData deadPlayer) {
@@ -159,6 +171,22 @@ namespace Assets.Scripts.Game {
 
         public void OnPlayerDied(PlayerData player) {
             PlayerDied?.Invoke(player);
+        }
+
+        private void ResetPlayerScores() {
+            foreach (PlayerData player in PlayersData) {
+                player.PlayerRoundsWon = 0;
+            }
+        }
+
+        public void RestartGame() {
+            ResetPlayerScores();
+            RoundStart.Invoke(this, EventArgs.Empty);
+        }
+
+        public void MainMenu() {
+            ResetPlayerScores();
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
