@@ -18,6 +18,8 @@ namespace Assets.Scripts.Ship {
 
         private bool mineHeld = false;
 
+        private bool aimHeld = false;
+
 
         private List<IBulletModifier> bulletModifiers = new List<IBulletModifier>();
 
@@ -25,11 +27,14 @@ namespace Assets.Scripts.Ship {
         void Start() {
             turretAimVector = Vector2.zero;
 
-            player.PlayerInputActions.Player.Shoot.performed += (context => shootHeld = true);
-            player.PlayerInputActions.Player.Shoot.canceled += (context => shootHeld = false);
+            player.PlayerInput.actions["Aim"].performed += (context => aimHeld = true);
+            player.PlayerInput.actions["Aim"].canceled += (context => aimHeld = false);
 
-            player.PlayerInputActions.Player.Mine.performed += (context => mineHeld = true);
-            player.PlayerInputActions.Player.Mine.canceled += (context => mineHeld = false);
+            player.PlayerInput.actions["Shoot"].performed += (context => shootHeld = true);
+            player.PlayerInput.actions["Shoot"].canceled += (context => shootHeld = false);
+
+            player.PlayerInput.actions["Mine"].performed += (context => mineHeld = true);
+            player.PlayerInput.actions["Mine"].canceled += (context => mineHeld = false);
         }
 
         private void Update() {
@@ -38,13 +43,15 @@ namespace Assets.Scripts.Ship {
         }
 
         private void FixedUpdate() {
-            RotateTurret();
+            if (aimHeld) {
+                RotateTurret();
+            }
             ProcessShooting();
         }
 
         // Aiming
         private void ProcessAimInput() {
-            Vector2 input = player.PlayerInputActions.Player.Aim.ReadValue<Vector2>();
+            Vector2 input = player.PlayerInput.actions["Aim"].ReadValue<Vector2>();
             if (player.PlayerInput.currentControlScheme.Equals("KeyboardMouse")) {
                 // Assuming 'input' is the current mouse position in screen coordinates
                 Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);

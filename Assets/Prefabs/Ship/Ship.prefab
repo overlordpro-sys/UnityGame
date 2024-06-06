@@ -204,6 +204,7 @@ MonoBehaviour:
   Turret: {fileID: 7225830380429166453}
   Rigidbody: {fileID: 5549162887905684989}
   Collider: {fileID: 1889157393657673333}
+  Animator: {fileID: 2480949506241363427}
   PlayerInput: {fileID: 3760081919127626792}
   PlayerHealth: {fileID: 4854684075034179798}
   PlayerMovement: {fileID: 5258607310684755032}
@@ -221,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 238c5a0ff6d8d2e44a55dc82d2449d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship: {fileID: 5547644529286468026}
   <MaxHealth>k__BackingField: 100
   healthBar: {fileID: 5880924024688612071}
 --- !u!114 &5258607310684755032
@@ -235,8 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e675faec37c0741b8996b740af470c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5547644529286468026}
-  thrustPower: 80
+  ship: {fileID: 5547644529286468026}
+  thrustPower: 160
   rotationPower: 1.2
 --- !u!114 &7435159554686375107
 MonoBehaviour:
@@ -256,7 +258,7 @@ MonoBehaviour:
   BoostCharge: 2
   BoostRechargeRate: 0.5
   BoostRechargeDelay: 2
-  BoostPower: 120
+  BoostPower: 200
 --- !u!114 &6022754305777516767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +534,7 @@ Animator:
   m_GameObject: {fileID: 3332834087453787305}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b295ae41f66d4430b43a1bb3ec90053, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -735,7 +737,7 @@ GameObject:
   m_Component:
   - component: {fileID: 851385540713432687}
   - component: {fileID: 2890428711257565812}
-  - component: {fileID: 4898833153367202551}
+  - component: {fileID: 3915014244513821118}
   m_Layer: 6
   m_Name: StatCanvas
   m_TagString: Untagged
@@ -750,7 +752,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6512311311561843127}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -786,26 +788,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1818360609 &4898833153367202551
-RotationConstraint:
+--- !u!114 &3915014244513821118
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6512311311561843127}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_Active: 1
-  m_IsLocked: 1
-  m_Sources:
-  - sourceTransform: {fileID: 0}
-    weight: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9dfb2cbd37b42c45a69354fd1539b82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7225830380429166453
 GameObject:
   m_ObjectHideFlags: 0

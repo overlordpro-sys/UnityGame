@@ -180,7 +180,7 @@ namespace Assets.InputSystem
                     ""id"": ""3b1540ea-6b46-4e0e-ab9c-bad183e88130"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Move"",
                     ""isComposite"": false,

@@ -20,8 +20,8 @@ namespace Assets.Scripts.Ship {
 
         void Start() {
 
-            player.PlayerInputActions.Player.Boost.performed += BoostPressed;
-            player.PlayerInputActions.Player.Boost.canceled += BoostReleased;
+            player.PlayerInput.actions["Boost"].performed += BoostPressed;
+            player.PlayerInput.actions["Boost"].canceled += BoostReleased;
         }
 
 

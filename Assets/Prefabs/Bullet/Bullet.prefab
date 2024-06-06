@@ -114,7 +114,7 @@ MonoBehaviour:
   DefaultAnimatorController: {fileID: 9100000, guid: 7973fabbe851d407a840c3abb60d748f, type: 2}
   HitAnimatorController: {fileID: 9100000, guid: d018582dfd2c8486089c2af452aec4b3, type: 2}
   size: 1
-  speed: 200
+  speed: 500
   accel: 0
   range: 2000
   damage: 20

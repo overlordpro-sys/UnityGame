@@ -12,8 +12,8 @@ namespace Assets.Scripts.Ship {
         [Header("Components")]
         [SerializeField] internal Rigidbody2D Rigidbody;
         [SerializeField] internal Collider2D Collider;
+        [SerializeField] internal Animator Animator;
         [SerializeField] internal PlayerInput PlayerInput;
-        internal PlayerControls PlayerInputActions;
 
         [Header("Scripts")]
         [SerializeField] internal ShipHealth PlayerHealth;
@@ -42,8 +42,6 @@ namespace Assets.Scripts.Ship {
         }
 
         public void Awake() {
-            PlayerInputActions = new PlayerControls();
-            PlayerInputActions.Enable();
         }
     }
 }
